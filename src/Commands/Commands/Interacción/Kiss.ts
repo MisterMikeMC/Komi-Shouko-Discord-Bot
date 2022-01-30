@@ -1,13 +1,14 @@
 import { Command } from "../../../interfaces";
-import { kiss } from 'random-gif-api'
+import neko from 'nekos.life'
 import { MessageEmbed } from "discord.js";
 import { Util } from "../../../File Data/Util/Emojis.json";
+const { sfw, nsfw } = new neko();
 export const command: Command = {
     display: "Kiss.ts",
     name: "kiss",
     aliases: [],
-    description: "Toma hasta que la vida no valga nada.",
-    syntaxis: "",
+    description: "Besa apacionadamente a alguien.",
+    syntaxis: "<@Usuario>",
     category: "Interacción",
     cooldown: {
         name: "KissCooldown_",
@@ -26,7 +27,7 @@ export const command: Command = {
                 ]
             })
             return;
-        } else if(Usuario.id === message.author.id) {
+        } else if (Usuario.id === message.author.id) {
             message.reply({
                 embeds: [
                     new MessageEmbed()
@@ -35,7 +36,7 @@ export const command: Command = {
                 ]
             })
             return;
-        } else if(Usuario.bot) {
+        } else if (Usuario.bot) {
             message.reply({
                 embeds: [
                     new MessageEmbed()
@@ -45,7 +46,7 @@ export const command: Command = {
             })
             return;
         }
-        kiss().then((img) => {
+        sfw.kiss().then((img) => {
             message.reply({
                 embeds: [
                     new MessageEmbed()

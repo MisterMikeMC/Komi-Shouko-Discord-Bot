@@ -1,16 +1,17 @@
 import { Command } from "../../../interfaces";
-import { kill } from 'random-gif-api'
+import neko from 'nekos.life'
 import { MessageEmbed } from "discord.js";
 import { Util } from "../../../File Data/Util/Emojis.json";
+const { sfw, nsfw } = new neko();
 export const command: Command = {
-    display: "Kill.ts",
-    name: "kill",
+    display: "Poke.ts",
+    name: "poke",
     aliases: [],
-    description: "Mata a la persona que más odias.",
+    description: "Molesta a alguien hasta colmar su paciencia.",
     syntaxis: "<@Usuario>",
     category: "Interacción",
     cooldown: {
-        name: "KillCooldown_",
+        name: "PokeCooldown_",
         time: "1m"
     },
     onlyOwner: false,
@@ -26,7 +27,7 @@ export const command: Command = {
                 ]
             })
             return;
-        } else if(Usuario.id === message.author.id) {
+        } else if (Usuario.id === message.author.id) {
             message.reply({
                 embeds: [
                     new MessageEmbed()
@@ -35,7 +36,7 @@ export const command: Command = {
                 ]
             })
             return;
-        } else if(Usuario.bot) {
+        } else if (Usuario.bot) {
             message.reply({
                 embeds: [
                     new MessageEmbed()
@@ -45,12 +46,12 @@ export const command: Command = {
             })
             return;
         }
-        kill().then((img) => {
+        sfw.poke().then((img) => {
             message.reply({
                 embeds: [
                     new MessageEmbed()
-                        .setTitle("Kill X~X")
-                        .setDescription(`**${message.author.tag}** mato a **${Usuario.tag}**.`)
+                        .setTitle("Poke :'c")
+                        .setDescription(`**${message.author.tag}** esta molestando a **${Usuario.tag}**.`)
                         .setImage(`${img}`)
                         .setColor("RANDOM")
                 ]
