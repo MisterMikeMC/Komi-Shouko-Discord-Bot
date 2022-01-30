@@ -4,7 +4,7 @@ import { Util } from '../../../File Data/Util/Emojis.json'
 export const command: Command = {
     display: "Purge.ts",
     name: "purge",
-    aliases: ["clear", "bulkdelete"],
+    aliases: ["clear", "bulkdelete", "nuke"],
     description: "Elemina una cantidad de mensajes.",
     syntaxis: "<Cantidad de mensajes>",
     category: "Moderación",

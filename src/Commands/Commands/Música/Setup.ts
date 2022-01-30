@@ -33,8 +33,6 @@ export const command: Command = {
         }
         let MusicChannel = MusicaDatos.MusicChannel;
         let MusicMessage = MusicaDatos.MusicMessage;
-
-        //Retorno
         try {
             if(MusicChannel !== 'Undefined' && message.guild.channels.cache.find(channel => channel.id === `${MusicChannel}`)){
                 message.reply({
