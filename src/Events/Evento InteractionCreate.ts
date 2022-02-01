@@ -30,6 +30,31 @@ export const event: Event = {
         } else if (interaction.isButton()) {
             let Queue = Komi.distube.getQueue(interaction);
             let ID = interaction.customId;
+            if (ID === 'verificationButton') {
+                if (interaction.guild.id !== '887356477222834196') {
+                    interaction.reply({
+                        content: "<a:Nekoraisu_No:880883974279426089> | El boton de verificació NO tienen función si no están en mi servidor __🌸 Simps de Nekoraisu 🌸__",
+                        ephemeral: true
+                    })
+                    return;
+                }
+                //@ts-ignore
+                if (!interaction.member.roles.cache.has('888224970403106856')) {
+                    //@ts-ignore
+                    interaction.member.roles.add('888224970403106856')
+                    interaction.reply({
+                        content: `<:Nekoraisu_Rem_Hate:885986751062085652> | Has obtenido el rol de <@&888224970403106856>`,
+                        ephemeral: true
+                    })
+                } else {
+                    //@ts-ignore
+                    interaction.member.roles.remove('888224970403106856')
+                    interaction.reply({
+                        content: `<:Nekoraisu_Ram_Hate:885986787154100234> | Se te ha removido el rol de <@&888224970403106856>`,
+                        ephemeral: true
+                    })
+                }
+            }
             if (ID === 'musicButtonLoop' || ID === 'musicButtonPause' || ID === 'musicButtonJoin' || ID === 'musicButtonResume' || ID === 'musicButtonStop' || ID === 'musicButtonPrevious' || ID === 'musicButtonVolumeDown' || ID === 'musicButtonPlayNow' || ID === 'musicButtonVolumeUp' || ID === 'musicButtonSkip') {
                 let CMDCooldownName = "InteractionMusicButtonsCooldown_"
                 let CMDCooldownTime = ms("6s")
@@ -158,6 +183,7 @@ export const event: Event = {
                         let MusicChannel = MusicSytem.MusicChannel;
                         let MusicMessage = MusicSytem.MusicMessage;
                         if (MusicChannel && MusicMessage) {
+                            // @ts-ignore
                             Komi.channels.resolve(MusicChannel).messages.fetch(MusicMessage).then(msg => {
                                 msg.edit({
                                     content: `**Komi Queue:**\n\n${QueueStatus}`,
@@ -175,7 +201,8 @@ export const event: Event = {
                 } else if (ID === 'musicButtonPause') {
                     await interaction.deferUpdate()
                 } else if (ID === 'musicButtonJoin') {
-                    if(!interaction.guild.me.voice.channel){
+                    if (!interaction.guild.me.voice.channel) {
+                        // @ts-ignore
                         let voiceChannel = interaction.member?.voice.channel;
                         if (!voiceChannel) {
                             interaction.reply({
@@ -207,9 +234,9 @@ export const event: Event = {
                             })
                         })
                     } else {
-                        if(Queue){
-                            if(Queue.song[0]){
-                                if(Queue.song[0].user.id !== interaction.user.id){
+                        if (Queue) {
+                            if (Queue.song[0]) {
+                                if (Queue.song[0].user.id !== interaction.user.id) {
                                     interaction.reply({
                                         embeds: [
                                             new MessageEmbed()
@@ -222,6 +249,7 @@ export const event: Event = {
                                 }
                             }
                         }
+                        // @ts-ignore
                         let voiceChannel = interaction.member?.voice.channel;
                         if (!voiceChannel) {
                             interaction.reply({
