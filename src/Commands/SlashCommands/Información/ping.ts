@@ -5,15 +5,9 @@ export default new SlashCommandStructure({
     name: 'ping',
     description: 'Muestra el ping de Komi-san.',
     run: async ({ Komi, interaction }) => {
-        let EmojiPing1 = Ping.Ping1;
-        let EmojiPing2 = Ping.Ping2;
-        let EmojiPing3 = Ping.Ping3;
-        let EmojiPing4 = Ping.Ping4;
-        let EmojiPing5 = Ping.Ping5;
+        let EmojiPing1 = Ping.Ping1; let EmojiPing2 = Ping.Ping2; let EmojiPing3 = Ping.Ping3; let EmojiPing4 = Ping.Ping4; let EmojiPing5 = Ping.Ping5; let PingEmojiFinal1; let PingEmojiFinal2;
         let PingRespuesta = Date.now() - interaction.createdTimestamp;
         let PingApi = Komi.ws.ping;
-        let PingEmojiFinal1;
-        let PingEmojiFinal2;
         let Color;
         if (PingRespuesta <= 60) {
             PingEmojiFinal1 = EmojiPing5

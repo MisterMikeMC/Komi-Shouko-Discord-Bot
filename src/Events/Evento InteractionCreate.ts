@@ -1,6 +1,6 @@
 import { CommandInteractionOptionResolver, Interaction, MessageActionRow, MessageButton, MessageEmbed } from 'discord.js'
 import { Event } from '../interfaces'
-import { Util, Music } from '../File Data/Util/Emojis.json'
+import { Util, Music, Meme } from '../File Data/Util/Emojis.json'
 import { ExtendedInteraction } from '../SlashCommandsInterface/SlashCommands';
 import ms from 'ms'
 import prms from 'pretty-ms'
@@ -18,7 +18,8 @@ export const event: Event = {
                         new MessageEmbed()
                             .setDescription(`${Util.No} | Estas usando un comando invalido.`)
                             .setColor("#BE0000")
-                    ]
+                    ],
+                    ephemeral: true
                 })
             } else {
                 SlashCommand.run({
@@ -33,7 +34,7 @@ export const event: Event = {
             if (ID === 'verificationButton') {
                 if (interaction.guild.id !== '887356477222834196') {
                     interaction.reply({
-                        content: "<a:Nekoraisu_No:880883974279426089> | El boton de verificació NO tienen función si no están en mi servidor __🌸 Simps de Nekoraisu 🌸__",
+                        content: `${Util.No} | El boton de verificació NO tienen función si no están en mi servidor __🌸 Simps de Nekoraisu 🌸__`,
                         ephemeral: true
                     })
                     return;
@@ -43,14 +44,14 @@ export const event: Event = {
                     //@ts-ignore
                     interaction.member.roles.add('888224970403106856')
                     interaction.reply({
-                        content: `<:Nekoraisu_Rem_Hate:885986751062085652> | Has obtenido el rol de <@&888224970403106856>`,
+                        content: `${Meme.RemHate} | Has obtenido el rol de <@&888224970403106856>`,
                         ephemeral: true
                     })
                 } else {
                     //@ts-ignore
                     interaction.member.roles.remove('888224970403106856')
                     interaction.reply({
-                        content: `<:Nekoraisu_Ram_Hate:885986787154100234> | Se te ha removido el rol de <@&888224970403106856>`,
+                        content: `${Meme.RamHate} | Se te ha removido el rol de <@&888224970403106856>`,
                         ephemeral: true
                     })
                 }
