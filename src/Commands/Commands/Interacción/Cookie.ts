@@ -3,7 +3,7 @@ import { cookie } from 'random-gif-api'
 import { MessageEmbed } from "discord.js";
 import { Util } from "../../../File Data/Util/Emojis.json";
 export const command: Command = {
-    display: "Chocolate.ts",
+    display: "Cookie.ts",
     name: "cookie",
     aliases: [],
     description: "Dale una galleta a alguien.",
