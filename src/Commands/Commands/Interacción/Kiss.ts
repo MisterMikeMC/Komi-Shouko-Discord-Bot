@@ -2,7 +2,7 @@ import { Command } from "../../../interfaces";
 import neko from 'nekos.life'
 import { MessageEmbed } from "discord.js";
 import { Util } from "../../../File Data/Util/Emojis.json";
-const { sfw, nsfw } = new neko();
+const { sfw } = new neko();
 export const command: Command = {
     display: "Kiss.ts",
     name: "kiss",
@@ -52,7 +52,7 @@ export const command: Command = {
                     new MessageEmbed()
                         .setTitle("Kiss ♡w♡")
                         .setDescription(`**${message.author.tag}** besó a **${Usuario.tag}**.`)
-                        .setImage(`${img}`)
+                        .setImage(`${img.url}`)
                         .setColor("RANDOM")
                 ]
             })

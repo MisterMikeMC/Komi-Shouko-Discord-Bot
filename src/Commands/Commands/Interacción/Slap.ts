@@ -1,16 +1,17 @@
-import { Command } from "../../../interfaces";
-import { cookie } from 'random-gif-api'
-import { MessageEmbed } from "discord.js";
+import { Command } from '../../../interfaces';
+import { MessageEmbed } from 'discord.js';
 import { Util } from "../../../File Data/Util/Emojis.json";
+import neko from 'nekos.life'
+const { sfw } = new neko();
 export const command: Command = {
-    display: "Cookie.ts",
-    name: "cookie",
+    display: "Slap.ts",
+    name: "slap",
     aliases: [],
-    description: "Dale una galleta a alguien.",
+    description: "Dale una bofetada a alguien.",
     syntaxis: "<@Usuario>",
     category: "Interacción",
     cooldown: {
-        name: "CookieCooldown_",
+        name: "SlapCooldown_",
         time: "1m"
     },
     onlyOwner: false,
@@ -45,13 +46,13 @@ export const command: Command = {
             })
             return;
         }
-        cookie().then((img) => {
+        sfw.slap().then((img) => {
             message.reply({
                 embeds: [
                     new MessageEmbed()
-                        .setTitle("Cookie :>")
-                        .setDescription(`**${message.author.tag}** le dio una galleta a **${Usuario.tag}**.`)
-                        .setImage(`${img}`)
+                        .setTitle("Slap @o@")
+                        .setDescription(`**${message.author.tag}** le dio una bofetada a **${Usuario.tag}**.`)
+                        .setImage(`${img.url}`)
                         .setColor("RANDOM")
                 ]
             })
