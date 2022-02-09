@@ -1,5 +1,5 @@
 import chalk from "chalk";
-export default function Colors(text: string, color: number) {
+export const Colors = (text: string, color: number) => {
     if (color === 1) {
         console.log(chalk.black(text))
     } else if (color === 2) {

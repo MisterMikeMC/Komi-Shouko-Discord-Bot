@@ -10,10 +10,9 @@ export const event: Event = {
     name: 'interactionCreate',
     run: async (Komi, interaction: Interaction) => {
         if (interaction.isCommand()) {
-            await interaction.deferReply();
             const SlashCommand = Komi.slashcommands.get(interaction.commandName);
             if (!SlashCommand) {
-                interaction.followUp({
+                interaction.reply({
                     embeds: [
                         new MessageEmbed()
                             .setDescription(`${Util.No} | Estas usando un comando invalido.`)
@@ -22,6 +21,16 @@ export const event: Event = {
                     ephemeral: true
                 })
             } else {
+                if (!interaction.guild.me.permissions.has(['SEND_MESSAGES', 'VIEW_CHANNEL', 'EMBED_LINKS'])) {
+                    interaction.reply({
+                        embeds: [
+                            new MessageEmbed()
+                                .setDescription(`${Util.No} | No tengo permisos suficientes.`)
+                                .setColor("#BE0000")
+                        ],
+                        ephemeral: true
+                    })
+                }
                 SlashCommand.run({
                     args: interaction.options as CommandInteractionOptionResolver,
                     Komi,

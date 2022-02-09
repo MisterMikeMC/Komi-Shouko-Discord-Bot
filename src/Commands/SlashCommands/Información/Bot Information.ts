@@ -6,7 +6,7 @@ export default new SlashCommandStructure({
     description: 'Comando que muestra toda la información relevante de Komi-san.',
     run: async ({ Komi, interaction }) => {
         const roleColor = interaction.guild.me.displayHexColor === "#000000" ? "#ffffff" : interaction.guild.me.displayHexColor;
-        interaction.followUp({
+        interaction.reply({
             embeds: [
                 new MessageEmbed()
                     .setAuthor({

@@ -34,11 +34,11 @@ export const command: Command = {
                 ]
             })
             return;
-        } else if (Number(Arguments) <= 0 || Number(Arguments) >= 100) {
+        } else if (Number(Arguments) <= 0 || Number(Arguments) >= 99) {
             message.reply({
                 embeds: [
                     new MessageEmbed()
-                        .setDescription(`${Util.No} | Necesitas ingresar una cantidad del 1 al 100.`)
+                        .setDescription(`${Util.No} | Necesitas ingresar una cantidad del 1 al 99.`)
                         .setColor("#990000")
                 ]
             })
@@ -72,7 +72,5 @@ export const command: Command = {
                 })
                 return;
             })
-
-
     }
 }

@@ -6,7 +6,7 @@ const Configs = new Schema(
         ServerName: String,
         ServerPrefix: {
             type: String,
-            default: "n!"
+            default: "k!"
         },
         KomiInSeverStatus: Boolean,
         ServerMessageJoin: Boolean

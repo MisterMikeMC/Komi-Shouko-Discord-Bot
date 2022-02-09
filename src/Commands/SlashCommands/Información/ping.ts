@@ -36,7 +36,7 @@ export default new SlashCommandStructure({
             PingEmojiFinal2 = EmojiPing1
             Color = "0x930000"
         }
-        interaction.followUp({
+        interaction.reply({
             embeds: [
                 new MessageEmbed()
                     .setTitle("¡Ping de Komi-san!")

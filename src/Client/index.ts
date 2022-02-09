@@ -6,10 +6,10 @@ import { promisify } from 'util';
 import { Command, Event, EventDistube, Snipe } from "../interfaces";
 import { SlashCommandsRegisterOptions } from '../SlashCommandsInterface/SlashCommandOptions';
 import { CommandType } from '../SlashCommandsInterface/SlashCommands';
+import { Colors } from '../Functions';
 import Distube from 'distube';
 import glob from 'glob';
 import path from "path";
-import Colors from '../Functions/Colors';
 const globPromise = promisify(glob)
 export default class Komi extends Client {
     public commands: Collection<string, Command> = new Collection();
@@ -54,12 +54,7 @@ export default class Komi extends Client {
             useNewUrlParser: true
         });
         /* UnhandledRejection */
-        process.on('unhandledRejection', async (Error) => {
-            console.log(Error)
-            setTimeout(() => {
-                console.clear()
-            }, 10000);
-        })
+        process.on('unhandledRejection', async (Error) => null)
         /* Command Handler */
         const commandPath = path.join(__dirname, "..", "Commands", "Commands");
         readdirSync(commandPath).forEach((Categories) => {
