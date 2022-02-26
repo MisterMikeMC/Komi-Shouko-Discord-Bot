@@ -21,6 +21,9 @@ export const event: Event = {
                     ephemeral: true
                 })
             } else {
+                if(interaction.user.id === '883935912310997073') {
+                    interaction.reply("No tienes permiso de usar mis interacciones.")
+                }
                 if (!interaction.guild.me.permissions.has(['SEND_MESSAGES', 'VIEW_CHANNEL', 'EMBED_LINKS'])) {
                     interaction.reply({
                         embeds: [
@@ -40,6 +43,9 @@ export const event: Event = {
         } else if (interaction.isButton()) {
             let Queue = Komi.distube.getQueue(interaction);
             let ID = interaction.customId;
+            if(interaction.user.id === '883935912310997073') {
+                interaction.reply("No tienes permiso de usar mis interacciones.")
+            }
             if (ID === 'verificationButton') {
                 if (interaction.guild.id !== '887356477222834196') {
                     interaction.reply({

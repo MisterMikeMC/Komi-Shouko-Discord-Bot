@@ -122,5 +122,28 @@
         "Rias": "<a:Rias:885986194192736297>",
         "Rossweisse": "<a:Rossweisse:885986212567973918>",
         "Xenovia": "<a:Xenova:885986249175879711>"
+    },
+    "KomiShouko": {
+        "KomiBRUH": "<:KomiBRUH:941762914564583440>",
+        "KomiBruh": "<:KomiBruh:941489689079201853>",
+        "KomiFlushed": "<:KomiFlushed:934842921159626822>",
+        "KomiHi": "<:KomiHi:934844071191650374>",
+        "KomiHm": "<:KomiHm:941762890506051585>",
+        "KomiHmm": "<:KomiHmm:934844150069751808>",
+        "KomiIntrigued": "<:KomiIntrigued:934844227756630046>",
+        "KomiKat": "<:KomiKat:934844001520066600>",
+        "KomiMaidExcited": "<:KomiMaidExcited:934842805422026793>",
+        "KomiOK": "<:KomiOK:934844034885746798>",
+        "KomiQ": "<:KomiQ:941762863809318922>",
+        "KomiSMILE": "<:KomiSMILE:934844289580679188>",
+        "KomiSee": "<:KomiSee:934843350350168105>",
+        "KomiShy": "<:KomiShy:934843646010863706>",
+        "KomiSleep": "<:KomiSleep:934843430562070528>",
+        "KomiSmile": "<:KomiSmile:934843964559872000>",
+        "KomiThinking": "<:KomiThinking:934844104402161674>",
+        "KomiWatching": "<:KomiWatching:934843385796251658>",
+        "KomiWut": "<:KomiWut:934843566314909696>",
+        "KomiExcited": "<a:KomiExcited:934842890000150538>",
+        "KomiPoint": "<a:KomiPoint:934843505434566696>"
     }
 }

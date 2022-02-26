@@ -1,3 +1,5 @@
+// Configs del visual studio code.
+
 {
     "workbench.colorTheme": "One Dark Pro",
     "security.workspace.trust.untrustedFiles": "open",

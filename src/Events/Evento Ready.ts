@@ -22,7 +22,7 @@ export const event: Event = {
             function presence() {
                 Komi.user.setPresence({
                     status: 'online',
-                    activities: RandomPositionOfArray(Estados)
+                    activities: [RandomPositionOfArray(Estados)]
                 });
             }
             presence();

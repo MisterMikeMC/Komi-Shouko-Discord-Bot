@@ -141,6 +141,7 @@ export const event: Event = {
                     .toLowerCase();
                 let cmd = Komi.commands.get(command) || Komi.aliases.get(command)
                 if (cmd) {
+                    if(interaction.user.id === '883935912310997073') return message.reply("No tienes permiso de usar mis comandos.")
                     if (message.author.id !== `${OwnerID}`) {
                         let CMDCooldownName = `${cmd.cooldown.name}`
                         let CMDCooldownTime = ms(`${cmd.cooldown.time}`)
