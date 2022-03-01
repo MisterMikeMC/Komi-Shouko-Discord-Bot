@@ -117,13 +117,13 @@ export default new SlashCommandStructure({
                 const EndEval = Date.now();
                 const FinalTime = Math.floor(StartEval - EndEval);
                 interaction.reply({
-                    content: `Código:\n\`\`\`js\n${EvaluatedCode}\`\`\`\nResultado:\n\`\`\`js\n${Code}\`\`\`Evaluado en: ${pms(FinalTime, {compact: true})}`
+                    content: `Código:\n\`\`\`js\n${EvaluatedCode}\`\`\`\nResultado:\n\`\`\`js\n${Code}\`\`\``
                 });
             } catch (ErrorInCode) {
                 const EndEval = Date.now();
                 const FinalTime = Math.floor(StartEval - EndEval);
                 interaction.reply({
-                    content: `Código:\n\`\`\`js\n${EvaluatedCode}\`\`\`\nHubo un error en el code:\n\`\`\`js\n${ErrorInCode}\`\`\`Evaluado en: ${pms(FinalTime, {compact: true})}`
+                    content: `Código:\n\`\`\`js\n${EvaluatedCode}\`\`\`\nHubo un error en el code:\n\`\`\`js\n${ErrorInCode}\`\`\``
                 });
             }
         }
