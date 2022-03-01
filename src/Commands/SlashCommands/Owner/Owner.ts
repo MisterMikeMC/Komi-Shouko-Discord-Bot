@@ -109,19 +109,14 @@ export default new SlashCommandStructure({
                 })
                 return
             }
-            const StartEval = Date.now();
             try {
                 let Code = "";
                 Code = await eval(EvaluatedCode);
                 Code = inspect(Code, { depth: 0 });
-                const EndEval = Date.now();
-                const FinalTime = Math.floor(StartEval - EndEval);
                 interaction.reply({
                     content: `Código:\n\`\`\`js\n${EvaluatedCode}\`\`\`\nResultado:\n\`\`\`js\n${Code}\`\`\``
                 });
             } catch (ErrorInCode) {
-                const EndEval = Date.now();
-                const FinalTime = Math.floor(StartEval - EndEval);
                 interaction.reply({
                     content: `Código:\n\`\`\`js\n${EvaluatedCode}\`\`\`\nHubo un error en el code:\n\`\`\`js\n${ErrorInCode}\`\`\``
                 });
