@@ -1,4 +1,4 @@
-import { MessageEmbed, MessageButton, MessageActionRow } from "discord.js";
+import { MessageEmbed, MessageButton, MessageActionRow, BaseGuildTextChannel } from "discord.js";
 import { Queue, Song } from "distube";
 import { EventDistube } from "../interfaces";
 import { Music, Util } from '../File Data/Util/Emojis.json'
@@ -67,8 +67,8 @@ export const distubeevent: EventDistube = {
                 } else {
                     RequestStatus = `*${RequestNow}*`
                 }
-
-                Komi.channels.resolve(MusicChannel).messages.fetch(MusicMessage).then(msg => {
+                let MusicChannelFinal = Komi.channels.resolve(MusicChannel) as BaseGuildTextChannel
+                MusicChannelFinal.messages.fetch(MusicMessage).then(msg => {
                     msg.edit({
                         content: `**Komi Queue:**\n\n${QueueStatus}`,
                         embeds: [

@@ -1,0 +1,68 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    display: grid;
+    place-items: center;
+    height: 100vh;
+    background: #222;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 247px;
+    height: 347px;
+    padding: 1em;
+    text-align: center;
+    background: #171614;
+    border-radius: .8em;
+    color: #ff49c2;
+    cursor: pointer;
+    overflow: hidden;
+    z-index: 1;
+    transition: 1.5s;
+}
+
+.card:hover {
+    color: #6f22db;
+}
+
+.container {
+    display: grid;
+    place-items: center;
+    position: relative;
+    width: 255px;
+    height: 355px;
+    border-radius: 1em;
+    background: linear-gradient(50deg, #ee74da, #994ffafc);
+    overflow: hidden;
+}
+
+.container::before {
+    content: "";
+    position: absolute;
+    width: 455px;
+    height: 35px;
+    top: 0;
+    right: 35px;
+    transition: 1.9s;
+    background: linear-gradient(50deg, #ff00bb, #8000ff);
+    transform: rotate(-45deg) translate(0, -100px);
+}
+
+.container:hover::before {
+    animation: cardEffect 1.9s;
+}
+
+@keyframes cardEffect {
+    100% {
+        transform: rotate(-45deg) translate(0, 450px);
+    }
+}

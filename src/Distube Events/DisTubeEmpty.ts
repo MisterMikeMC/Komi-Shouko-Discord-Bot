@@ -1,11 +1,11 @@
-import { MessageEmbed, MessageActionRow, MessageButton } from 'discord.js'
-import { Queue, Song } from "distube";
+import { MessageEmbed, MessageActionRow, MessageButton, BaseGuildTextChannel } from 'discord.js'
+import { Queue } from "distube";
 import { EventDistube } from "../interfaces";
 import { Music } from '../File Data/Util/Emojis.json'
 const MusicData = require('../Schemas/SchemaMusicSystem')
-export const distubeevent:EventDistube = {
-    name: 'disconnect',
-    run: async(Komi, queue: Queue, song: Song) => {
+export const distubeevent: EventDistube = {
+    name: 'empty',
+    run: async (Komi, queue: Queue) => {
         let MusicSytem = await MusicData.findOne({
             ServerID: queue.id
         });
@@ -19,7 +19,6 @@ export const distubeevent:EventDistube = {
                 let SongNowStatus;
                 let VolumeStatus;
                 let LoopStatus;
-                let LoopValue;
                 let RequestStatus;
                 let VolumeNow;
                 let LoopNow;
@@ -53,21 +52,15 @@ export const distubeevent:EventDistube = {
                 if (!LoopNow) {
                     LoopStatus = "*Apagado.*"
                 } else {
-                    if (LoopNow === 0) {
-                        LoopValue = "Apagado."
-                    } else if (LoopNow === 1) {
-                        LoopValue = "Song"
-                    } else if (LoopNow === 2) {
-                        LoopValue = "Queue"
-                    }
-                    LoopStatus = `*${LoopValue}*`
+                    LoopStatus = `*${LoopNow}*`
                 }
                 if (!RequestNow) {
                     RequestStatus = `*Nadie...*`
                 } else {
                     RequestStatus = `*${RequestNow}*`
                 }
-                Komi.channels.resolve(MusicChannel).messages.fetch(MusicMessage).then(msg => {
+                let MusicChannelFinal = Komi.channels.resolve(MusicChannel) as BaseGuildTextChannel
+                MusicChannelFinal.messages.fetch(MusicMessage).then(msg => {
                     msg.edit({
                         content: `**Komi Queue:**\n\n${QueueStatus}`,
                         embeds: [

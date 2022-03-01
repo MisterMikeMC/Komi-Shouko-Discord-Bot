@@ -1,11 +1,11 @@
-import { MessageEmbed, MessageActionRow, MessageButton } from 'discord.js'
+import { MessageEmbed, MessageActionRow, MessageButton, BaseGuildTextChannel } from 'discord.js'
 import { Queue } from "distube";
 import { EventDistube } from "../interfaces";
 import { Music } from '../File Data/Util/Emojis.json'
 const MusicData = require('../Schemas/SchemaMusicSystem')
-export const distubeevent:EventDistube = {
+export const distubeevent: EventDistube = {
     name: 'finish',
-    run: async(Komi, queue: Queue) => {
+    run: async (Komi, queue: Queue) => {
         let MusicSytem = await MusicData.findOne({
             ServerID: queue.id
         });
@@ -109,7 +109,7 @@ export const distubeevent:EventDistube = {
                 const MusicTableEmbed = new MessageEmbed()
                     .setTitle("¡Komi Music!")
                     .addFields(
-                        { name: `Canción en reproducción:`, value: `${SongNowStatus}`, inline: false }, 
+                        { name: `Canción en reproducción:`, value: `${SongNowStatus}`, inline: false },
                         { name: `Volumen:`, value: `${VolumeStatus}`, inline: true },
                         { name: `Loop:`, value: `${LoopStatus}`, inline: true },
                         { name: `Pedida por:`, value: `${RequestStatus}`, inline: true }
@@ -120,7 +120,8 @@ export const distubeevent:EventDistube = {
                         text: "Escribe tu canción en el chat.",
                         iconURL: `${Komi.user.displayAvatarURL()}`
                     })
-                Komi.channels.resolve(MusicChannel).messages.fetch(MusicMessage).then(msg => {
+                let MusicChannelFinal = Komi.channels.resolve(MusicChannel) as BaseGuildTextChannel
+                MusicChannelFinal.messages.fetch(MusicMessage).then(msg => {
                     msg.edit({
                         content: `**Komi Queue:**\n\n${QueueStatus}`,
                         embeds: [
