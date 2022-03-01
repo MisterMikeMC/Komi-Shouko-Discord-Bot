@@ -21,7 +21,7 @@
         "@distube/spotify": "1.1.0",
         "@iamtraction/google-translate": "1.1.2",
         "beautify": "^0.0.8",
-        "body-parser": "^1.19.1",
+        "body-parser": "^1.19.2",
         "chalk": "4.1.2",
         "discord.js": "13.6.0",
         "distube": "3.1.1",
