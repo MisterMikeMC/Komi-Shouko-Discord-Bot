@@ -1,0 +1,26 @@
+{
+    "extends": [
+        "eslint:recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+        "@typescript-eslint"
+    ],
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es2021": true
+    },
+    "parserOptions": {
+        "ecmaVersion": 12
+    },
+    "rules": {
+        "no-unused-vars": "warn",
+        "no-var": "error",
+        "prefer-const": "off",
+        "@typescript-eslint/no-unused-vars": "warn",
+        "@typescript-eslint/prefer-const": "off",
+        "@typescript-eslint/no-var-requires": "warn"
+    },
+    "ignorePatterns": ["*.html", "*.css"]
+}

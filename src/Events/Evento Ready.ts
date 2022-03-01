@@ -1,5 +1,6 @@
 import { Event } from '../interfaces'
-import { Colors, RandomPositionOfArray } from '../Functions';
+import { RandomPositionOfArray } from '../Functions';
+import chalk from 'chalk';
 export const event: Event = {
     name: 'ready',
     run: (Komi) => {
@@ -27,11 +28,6 @@ export const event: Event = {
             }
             presence();
         }, 15000)
-        Colors(`${Komi.user.tag} lista ✅`, 27)
-        Colors("Conectada a MongoDB ✅", 27)
-        Colors(`Se han cargado ${Komi.commands.size} Comando correctamente ✅`, 27)
-        Colors(`Se han cargado ${Komi.slashcommands.size} SlashCommands correctamente ✅`, 27)
-        Colors(`Se han cargado ${Komi.events.size} Eventos correctamente ✅`, 27)
-        Colors(`Se han cargado ${Komi.distubeevent.size} Eventos de DisTube correctamente ✅`, 27)
+        console.log(`${chalk.hex("#BE00FF").bold(`${Komi.user.username}`)} lista ✅`)
     },
 }

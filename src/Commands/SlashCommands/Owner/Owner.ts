@@ -1,7 +1,8 @@
 import { MessageActionRow, MessageButton, MessageEmbed } from 'discord.js';
 import { SlashCommandStructure } from "../../../SlashCommandsInterface/SlashCommandStructure";
 import { Util } from '../../../File Data/Util/Emojis.json'
-import beautify from 'beautify'
+import { inspect } from "util";
+import pms from 'pretty-ms'
 export default new SlashCommandStructure({
     name: 'owner',
     description: 'Sub SlashCommands de Owner.',
@@ -32,7 +33,7 @@ export default new SlashCommandStructure({
                     required: true
                 }
             ]
-        }/*,
+        },
         {
             name: 'eval',
             description: 'Evalúa un codigo.',
@@ -45,7 +46,7 @@ export default new SlashCommandStructure({
                     required: true
                 }
             ]
-        }*/
+        }
     ],
     run: async ({ Komi, interaction }) => {
         if (interaction.options.getSubcommand() === 'embeds') {
@@ -95,35 +96,36 @@ export default new SlashCommandStructure({
                     ]
                 })
             }
-        }
-        /*
-        else if (interaction.options.getSubcommand() === 'eval') {
-            let Code = interaction.options.getString('code')
-            let ArrayBlockFunctionsForEval = [
-                "token",
-                "process",
-                "destroy"
-            ]
-            if (Code.toLowerCase().includes(`${ArrayBlockFunctionsForEval}`)) {
+        } else if (interaction.options.getSubcommand() === 'eval') {
+            let EvaluatedCode = interaction.options.getString('code')
+            if (EvaluatedCode.includes("process.env.Token") || EvaluatedCode.includes("process.env.MongoURL") || EvaluatedCode.includes("Komi.destroy")) {
                 interaction.reply({
                     embeds: [
                         new MessageEmbed()
-                            .setDescription(`${Util.No} | Estas usado palabras prohibidas en el code que quieres evaluar.`)
+                            .setDescription(`${Util.No} | Codigo a evaluar invalido.`)
                             .setColor("#990000")
                     ],
                     ephemeral: true
                 })
                 return
             }
-            let EvaluatedCode = eval(Code)
-            interaction.channel.send({
-                content: `Código:\n\`\`\`js\n${beautify(Code, { format: "js" })}\`\`\`\nResultado:\n\`\`\`js\n${EvaluatedCode}\`\`\``
-            }).catch((ErrorInCode) => {
-                interaction.channel.send({
-                    content: `Código:\n\`\`\`js\n${beautify(Code, { format: "js" })}\`\`\`\nHubo un error en el code:\n\`\`\`js\n${ErrorInCode}\`\`\``
-                })
-            })
+            const StartEval = Date.now();
+            try {
+                let Code = "";
+                Code = await eval(EvaluatedCode);
+                Code = inspect(Code, { depth: 0 });
+                const EndEval = Date.now();
+                const FinalTime = Math.floor(StartEval - EndEval);
+                interaction.reply({
+                    content: `Código:\n\`\`\`js\n${EvaluatedCode}\`\`\`\nResultado:\n\`\`\`js\n${Code}\`\`\`Evaluado en: ${pms(FinalTime, {compact: true})}`
+                });
+            } catch (ErrorInCode) {
+                const EndEval = Date.now();
+                const FinalTime = Math.floor(StartEval - EndEval);
+                interaction.reply({
+                    content: `Código:\n\`\`\`js\n${EvaluatedCode}\`\`\`\nHubo un error en el code:\n\`\`\`js\n${ErrorInCode}\`\`\`Evaluado en: ${pms(FinalTime, {compact: true})}`
+                });
+            }
         }
-        */
     }
 })

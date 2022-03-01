@@ -47,11 +47,15 @@ export default class Komi extends Client {
     };
     public async start() {
         this.registerModules()
-        this.login(process.env.TokenMain);
+        this.login(process.env.Token);
         connect(process.env.MongoURL, {
             useUnifiedTopology: true,
             useFindAndModify: false,
             useNewUrlParser: true
+        }).then(() => {
+            console.log("Conectada a MongoDB ✅")
+        }).catch((ErrorForConectionToDatabase) => {
+            console.log("Komi no se pudo conectar a MongoDB ❌")
         });
         /* UnhandledRejection */
         process.on('unhandledRejection', async (Error) => null)
@@ -130,13 +134,8 @@ export default class Komi extends Client {
         return (await import(filePath))?.default;
     }
     async registerCommands({ commands, guildId }: SlashCommandsRegisterOptions) {
-        if (guildId) {
-            this.guilds.cache.get(guildId)?.commands.set(commands);
-            Colors(`Se han registrado los SlashCommands en el servidor ${guildId} ✅`, 27);
-        } else {
             this.application.commands.set(commands);
-            Colors(`Se han registrado los SlashCommands de manera Global ✅`, 27);
-        }
+            console.log(`Se han registrado los SlashCommands de manera Global ✅`);
     }
     async registerModules() {
         const SlashCommands: ApplicationCommandDataResolvable[] = [];

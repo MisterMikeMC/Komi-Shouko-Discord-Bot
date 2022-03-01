@@ -4,7 +4,13 @@
     "description": "",
     "main": "index.ts",
     "scripts": {
-        "dev": "nodemon --exec node --loader ts-node/esm/transpile-only src/index.ts"
+        "test": "eslint --fix compiled/ && eslint compiled/",
+        "fix": "eslint --fix compiled/",
+        "tstest": "eslint src/",
+        "tsfix": "eslint --fix src/",
+        "watch": "tsc --watch",
+        "dev": "tsc && node compiled/index.js",
+        "testing": "nodemon --exec node --loader ts-node/esm/transpile-only src/index.ts"
     },
     "keywords": [],
     "author": "MrMikeMC",
@@ -35,6 +41,8 @@
         "util": "0.12.4"
     },
     "devDependencies": {
+        "@typescript-eslint/eslint-plugin": "^5.12.1",
+        "@typescript-eslint/parser": "^5.12.1",
         "nodemon": "2.0.15",
         "ts-node": "10.4.0",
         "typescript": "4.5.4"
