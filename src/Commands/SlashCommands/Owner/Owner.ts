@@ -49,6 +49,15 @@ export default new SlashCommandStructure({
         }
     ],
     run: async ({ Komi, interaction }) => {
+        if (interaction.user.id !== '437308398845952001') {
+            interaction.reply({
+                embeds: [
+                    new MessageEmbed()
+                        .setDescription(`${Util.No} | No tienes permisos suficientes para usar este comando.`)
+                        .setColor("#990000")
+                ]
+            })
+        }
         if (interaction.options.getSubcommand() === 'embeds') {
             let Type = interaction.options.getString('embed-type')
             if (Type === 'verificacion') {
@@ -104,14 +113,12 @@ export default new SlashCommandStructure({
                         new MessageEmbed()
                             .setDescription(`${Util.No} | Codigo a evaluar invalido.`)
                             .setColor("#990000")
-                    ],
-                    ephemeral: true
+                    ]
                 })
                 return
             }
             try {
-                let Code = "";
-                Code = await eval(EvaluatedCode);
+                let Code: String = await eval(EvaluatedCode);
                 Code = inspect(Code, { depth: 0 });
                 interaction.reply({
                     content: `Código:\n\`\`\`js\n${EvaluatedCode}\`\`\`\nResultado:\n\`\`\`js\n${Code}\`\`\``

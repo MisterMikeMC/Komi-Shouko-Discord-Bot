@@ -108,7 +108,20 @@ export default new SlashCommandStructure({
                         )
                 ]
             })
-        } else if (interaction.options.getSubcommand() === 'invite-me') {
+        } else if (interaction.options.getSubcommand() === 'bot-info') {
+            /**
+             * 1 = Replit + UptimeRobot
+             * 2 = Visual Studio Code (Local)
+             */
+            let TypeOfHosting: Number = 2
+            let TypeOfHostingMessage: String;
+            let TypeOfHostingMessage1 = `> ${Util.Arrow} ${Util.Replit} [Repl.it](https://replit.com).\n> ${Util.Arrow} ${Util.Uptimerobot} [Uptimerobot](https://uptimerobot.com).`
+            let TypeOfHostingMessage2 = `> ${Util.Arrow} ${Util.VisualStudioCodeInsider} [Visual Studio Code](https://code.visualstudio.com/insiders/).\n> ${Util.Arrow} ${Util.Terminal} [Terminal](https://www.microsoft.com/es-mx/p/windows-terminal/9n0dx20hk701).`
+            if (TypeOfHosting === 1) {
+                TypeOfHostingMessage = TypeOfHostingMessage1;
+            } else if (TypeOfHosting === 2) {
+                TypeOfHostingMessage = TypeOfHostingMessage2;
+            }
             const roleColor = interaction.guild.me.displayHexColor === "#000000" ? "#ffffff" : interaction.guild.me.displayHexColor;
             interaction.reply({
                 embeds: [
@@ -131,7 +144,7 @@ export default new SlashCommandStructure({
                             },
                             {
                                 name: `${Util.WindL} Hosteada en: ${Util.WindR}`,
-                                value: `> ${Util.Arrow} ${Util.Replit} [Repl.it](https://replit.com).\n> ${Util.Arrow} ${Util.Uptimerobot} [Uptimerobot](https://uptimerobot.com).`,
+                                value: `${TypeOfHostingMessage}`,
                                 inline: false,
                             },
                             {
