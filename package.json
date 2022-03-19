@@ -15,7 +15,7 @@
     "license": "ISC",
     "dependencies": {
         "@discordjs/opus": "0.7.0",
-        "@discordjs/voice": "0.6.0",
+        "@discordjs/voice": "0.8.0",
         "@distube/spotify": "1.1.0",
         "@iamtraction/google-translate": "1.1.2",
         "beautify": "0.0.8",
