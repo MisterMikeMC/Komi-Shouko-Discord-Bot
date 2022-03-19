@@ -1,2 +1,2 @@
-export { Colors } from "./Colors";
+export { MusicManger } from "./MusicManager";
 export { RandomPositionOfArray } from "./RandomPositionOfArray";
