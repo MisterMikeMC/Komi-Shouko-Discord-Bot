@@ -10,7 +10,7 @@
         "prettierFix": "prettier --write src/*",
         "start": "tsc && node compiled/index.js",
         "dev": "nodemon src/index.ts",
-        "update": "prettier --write src/* && git add . && git commit -m \"Komi gOd\""
+        "update": "prettier --write src/* && git add . && git commit -m \"Komi gOd\" && git push -u origin komi"
     },
     "author": "MrMikeMC",
     "license": "ISC",
