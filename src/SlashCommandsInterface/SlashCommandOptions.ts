@@ -1,6 +1,6 @@
-import { ApplicationCommandDataResolvable } from 'discord.js';
+import { ApplicationCommandDataResolvable } from "discord.js";
 
 export interface SlashCommandsRegisterOptions {
-    guildId?: string;
-    commands: ApplicationCommandDataResolvable[];
+  guildId?: string;
+  commands: ApplicationCommandDataResolvable[];
 }

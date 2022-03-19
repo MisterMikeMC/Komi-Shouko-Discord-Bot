@@ -1,20 +1,25 @@
-import { ChatInputApplicationCommandData, CommandInteraction, CommandInteractionOptionResolver, GuildMember, PermissionResolvable } from 'discord.js';
-import Komi from '../Client/index'
-
+import {
+  ChatInputApplicationCommandData,
+  CommandInteraction,
+  CommandInteractionOptionResolver,
+  GuildMember,
+  PermissionResolvable,
+} from "discord.js";
+import Komi from "../Client/index";
 
 export interface ExtendedInteraction extends CommandInteraction {
-    member: GuildMember;
+  member: GuildMember;
 }
 
 interface RunOption {
-    Komi: Komi,
-    interaction: CommandInteraction,
-    args: CommandInteractionOptionResolver
+  Komi: Komi;
+  interaction: CommandInteraction;
+  args: CommandInteractionOptionResolver;
 }
 
 type RunFunction = (options: RunOption) => any;
 
 export type CommandType = {
-    userPermisions?: PermissionResolvable[];
-    run: RunFunction;
-} & ChatInputApplicationCommandData
+  userPermisions?: PermissionResolvable[];
+  run: RunFunction;
+} & ChatInputApplicationCommandData;

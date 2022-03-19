@@ -2,4 +2,7 @@ node_modules/
 compiled/
 .vscode
 .env
+.prettierignore
+.eslintignore
+.eslintrc.json
 json.sqlite

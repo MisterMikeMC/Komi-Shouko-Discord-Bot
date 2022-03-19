@@ -1,26 +1,32 @@
 {
-    "extends": [
-        "eslint:recommended"
-    ],
-    "parser": "@typescript-eslint/parser",
-    "plugins": [
-        "@typescript-eslint"
-    ],
-    "env": {
-        "browser": true,
-        "commonjs": true,
-        "es2021": true
-    },
-    "parserOptions": {
-        "ecmaVersion": 12
-    },
-    "rules": {
-        "no-unused-vars": "warn",
-        "no-var": "error",
-        "prefer-const": "off",
-        "@typescript-eslint/no-unused-vars": "warn",
-        "@typescript-eslint/prefer-const": "off",
-        "@typescript-eslint/no-var-requires": "warn"
-    },
-    "ignorePatterns": ["*.html", "*.css"]
+  "extends": ["eslint:recommended"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es2021": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 12
+  },
+  "rules": {
+    "no-plusplus": "off",
+    "no-eval": "off",
+    "no-console": "off",
+    "prefer-const": "off",
+    "no-dupe-args": "warn",
+    "camelcase": "warn",
+    "comma-spacing": "warn",
+    "no-trailing-spaces": "warn",
+    "no-unused-vars": "warn",
+    "comma-dangle": "error",
+    "no-var": "error",
+    "@typescript-eslint/prefer-const": "off",
+    "@typescript-eslint/array-type": "warn",
+    "@typescript-eslint/explicit-function-return-type": "warn",
+    "@typescript-eslint/consistent-type-exports": "warn",
+    "@typescript-eslint/no-unused-vars": "warn",
+    "@typescript-eslint/no-var-requires": "error"
+  }
 }
