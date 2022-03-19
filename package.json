@@ -5,11 +5,12 @@
     "scripts": {
         "test": "eslint --fix compiled/ && eslint compiled/",
         "fix": "eslint --fix compiled/",
-        "eslintCheck": "eslint src/",
-        "eslintFix": "eslint --fix src/",
-        "prettierFix": "prettier --write .",
+        "eslintCheck": "eslint src/*",
+        "eslintFix": "eslint --fix src/*",
+        "prettierFix": "prettier --write src/*",
         "start": "tsc && node compiled/index.js",
-        "dev": "nodemon src/index.ts"
+        "dev": "nodemon src/index.ts",
+        "update": "prettier --write src/* && git add . && git commit -m \"Komi gOd\""
     },
     "author": "MrMikeMC",
     "license": "ISC",
@@ -39,8 +40,8 @@
     },
     "devDependencies": {
         "@types/node": "^17.0.21",
-        "@typescript-eslint/eslint-plugin": "5.12.1",
-        "@typescript-eslint/parser": "5.12.1",
+        "@typescript-eslint/eslint-plugin": "^5.12.1",
+        "@typescript-eslint/parser": "^5.12.1",
         "eslint": "^8.11.0",
         "nodemon": "2.0.15",
         "prettier": "2.6.0",
