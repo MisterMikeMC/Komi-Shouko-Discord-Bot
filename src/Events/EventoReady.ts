@@ -1,9 +1,10 @@
 import { Event } from "../interfaces";
-import { RandomPositionOfArray } from "../Functions";
+import { MusicManger, RandomPositionOfArray } from "../Functions";
 import chalk from "chalk";
 export const event: Event = {
   name: "ready",
   run: (Komi) => {
+
     setInterval(() => {
       const Estados = [
         { name: `Mencioname por ayuda.`, type: 1 },

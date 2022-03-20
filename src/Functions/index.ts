@@ -1,2 +1,2 @@
-export { MusicManger } from "./MusicManager";
+export { MusicManger } from "./MusicSystem/MusicSystemManager";
 export { RandomPositionOfArray } from "./RandomPositionOfArray";

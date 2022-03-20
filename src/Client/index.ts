@@ -22,6 +22,7 @@ export default class Komi extends Client {
   public distubeevent: Collection<string, EventDistube> = new Collection();
   public snipe: Map<string, Snipe> = new Map();
   public distube: any;
+  static distube: any;
   constructor() {
     super({
       intents: [
