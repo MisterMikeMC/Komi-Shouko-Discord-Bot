@@ -1,16 +1,16 @@
 import {
   MessageEmbed,
-  MessageActionRow,
   MessageButton,
+  MessageActionRow,
   BaseGuildTextChannel,
 } from "discord.js";
-import { Queue } from "distube";
+import { Queue, Song } from "distube";
 import { EventDistube } from "../interfaces";
-import { Music } from "../File Data/Util/Emojis.json";
+import { Music } from "../Emojis.json";
 const MusicData = require("../Schemas/SchemaMusicSystem");
 export const distubeevent: EventDistube = {
-  name: "empty",
-  run: async (Komi, queue: Queue) => {
+  name: "playSong",
+  run: async (Komi, queue: Queue, song: Song) => {
     let MusicSytem = await MusicData.findOne({
       ServerID: queue.id,
     });
@@ -24,6 +24,7 @@ export const distubeevent: EventDistube = {
         let SongNowStatus;
         let VolumeStatus;
         let LoopStatus;
+        let LoopValue;
         let RequestStatus;
         let VolumeNow;
         let LoopNow;
@@ -31,7 +32,7 @@ export const distubeevent: EventDistube = {
         if (Queue) {
           PlayNow = Queue.songs[0];
           VolumeNow = Queue.volume;
-          LoopNow = Queue.repeatMode;
+          LoopNow = Komi.distube.setRepeatMode(queue.textChannel);
           RequestNow = PlayNow.user;
         } else {
           PlayNow = false;
@@ -62,7 +63,14 @@ export const distubeevent: EventDistube = {
           VolumeStatus = `*${VolumeNow}%*`;
         }
         if (!LoopNow) {
-          LoopStatus = "*Apagado.*";
+          if (LoopNow === 0) {
+            LoopValue = "Apagado.";
+          } else if (LoopNow === 1) {
+            LoopValue = "Song";
+          } else if (LoopNow === 2) {
+            LoopValue = "Queue";
+          }
+          LoopStatus = `*${LoopValue}*`;
         } else {
           LoopStatus = `*${LoopNow}*`;
         }
@@ -94,9 +102,7 @@ export const distubeevent: EventDistube = {
                     inline: true,
                   }
                 )
-                .setImage(
-                  "https://cdn.discordapp.com/attachments/930674284425265182/934614467705192478/standard_1.gif"
-                )
+                .setImage(`${PlayNow.thumbnail}`)
                 .setColor("#4F00FF")
                 .setFooter({
                   text: "Escribe tu canción en el chat.",
@@ -151,9 +157,18 @@ export const distubeevent: EventDistube = {
             ],
           });
         });
+      } else {
+        queue.textChannel.send({
+          embeds: [
+            new MessageEmbed()
+              .setTitle("¡¡¡Reproduciendo!!!")
+              .setDescription(
+                `${Music.Playing} | Reproduciendo ahora: **${song.name}** - \`${song.formattedDuration}\``
+              )
+              .setColor("#5500ff"),
+          ],
+        });
       }
-    } else {
-      return;
     }
   },
 };

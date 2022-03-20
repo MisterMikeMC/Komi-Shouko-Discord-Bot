@@ -1,12 +1,14 @@
+import { Client } from "discord.js";
 export const MusicManger = (
-  idChannel: number,
+  client: Client,
+  idChannel: number | string,
   action: string,
-  musicTableId: number,
+  musicTableId: number | string,
   messageOutput?: string,
   ephemeral?: boolean
 ) => {
   return console.log(
-    `Params:\nidChannel: ${idChannel},\naction: ${action},\nmusicTableId: ${musicTableId},\nmessageOutput?: ${
+    `Params:clinet: ${client.user.tag},\nidChannel: ${idChannel},\naction: ${action},\nmusicTableId: ${musicTableId},\nmessageOutput?: ${
       messageOutput || "Undefined"
     },\nephemeral?: ${ephemeral || false}`
   );

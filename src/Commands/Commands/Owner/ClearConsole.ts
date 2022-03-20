@@ -1,6 +1,5 @@
 import { Command } from "../../../interfaces";
-import { Util } from "../../../File Data/Util/Emojis.json";
-import { OwnerID } from "../../../File Data/Data/Relevante.json";
+import { Util } from "../../../Emojis.json";
 export const command: Command = {
   display: "Clear Console.ts",
   name: "cls",
@@ -14,8 +13,7 @@ export const command: Command = {
   },
   onlyOwner: true,
   maintenance: false,
-  run: async (Komi, message, args) => {
-    if (message.author.id !== OwnerID) return;
+  run: async (Komi, message, args): Promise<void> => {
     console.clear();
     message.react(`${Util.Yes}`);
   },

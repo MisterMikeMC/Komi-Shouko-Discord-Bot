@@ -1,7 +1,7 @@
 import { MessageEmbed } from "discord.js";
 import { Command } from "../../../interfaces";
-import { Util } from "../../../File Data/Util/Emojis.json";
-const ServersData = require("../../../Schemas/SchemaServerData");
+import { Util } from "../../../Emojis.json";
+import ServersData from "../../../Schemas/SchemaServerData";
 export const command: Command = {
   display: "SetPrefix.ts",
   name: "setprefix",
@@ -15,7 +15,7 @@ export const command: Command = {
   },
   onlyOwner: false,
   maintenance: false,
-  run: async (Komi, message, args) => {
+  run: async (Komi, message, args): Promise<void> => {
     let ServerData = await ServersData.findOne({
       ServerID: message.guild.id,
     });

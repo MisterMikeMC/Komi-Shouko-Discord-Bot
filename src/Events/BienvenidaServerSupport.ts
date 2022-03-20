@@ -1,15 +1,17 @@
-import { MessageEmbed } from "discord.js";
+import { BaseGuildTextChannel, MessageEmbed } from "discord.js";
 import { Event } from "../interfaces";
 export const event: Event = {
   name: "guildMemberAdd",
-  run: async (Komi, member) => {
+  run: async (Komi, member): Promise<void> => {
     if (member.guild.id === "887356477222834196") {
       if (member.bot) {
         member.roles.add("888287304697913424");
-        member.setNickname(`➠║${member.user.username}〔〕`);
+        member.setNickname(`➠║${member.user.username}`);
       } else {
-        //@ts-ignore
-        Komi.channels.resolve("887362027956371507").send({
+        let Channel = Komi.channels.resolve(
+          "887362027956371507"
+        ) as BaseGuildTextChannel;
+        Channel.send({
           embeds: [
             new MessageEmbed()
               .setTitle("¡Bienvenido(a) al soporte de Komi Shouko!")

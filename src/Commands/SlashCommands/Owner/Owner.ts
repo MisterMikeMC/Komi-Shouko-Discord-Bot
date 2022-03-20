@@ -1,6 +1,6 @@
 import { MessageActionRow, MessageButton, MessageEmbed } from "discord.js";
-import { SlashCommandStructure } from "../../../SlashCommandsInterface/SlashCommandStructure";
-import { Util } from "../../../File Data/Util/Emojis.json";
+import { SlashCommandStructure } from "../../../interfaces/SlashCommand";
+import { Util } from "../../../Emojis.json";
 import { inspect } from "util";
 import pms from "pretty-ms";
 export default new SlashCommandStructure({

@@ -1,6 +1,6 @@
 import { Command } from "../../../interfaces";
 import { MessageEmbed } from "discord.js";
-import { Util, Badge, DxD } from "../../../File Data/Util/Emojis.json";
+import { Util, Badge, DxD } from "../../../Emojis.json";
 export const command: Command = {
   display: "Komi Info.ts",
   name: "botinfo",
@@ -14,7 +14,7 @@ export const command: Command = {
   },
   onlyOwner: false,
   maintenance: false,
-  run: async (Komi, message, args) => {
+  run: async (Komi, message, args): Promise<void> => {
     const roleColor =
       message.guild.me.displayHexColor === "#000000"
         ? "#ffffff"

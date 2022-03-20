@@ -1,16 +1,16 @@
 import {
   MessageEmbed,
-  MessageButton,
   MessageActionRow,
+  MessageButton,
   BaseGuildTextChannel,
 } from "discord.js";
-import { Queue, Song } from "distube";
+import { Queue } from "distube";
 import { EventDistube } from "../interfaces";
-import { Music } from "../File Data/Util/Emojis.json";
+import { Music } from "../Emojis.json";
 const MusicData = require("../Schemas/SchemaMusicSystem");
 export const distubeevent: EventDistube = {
-  name: "playSong",
-  run: async (Komi, queue: Queue, song: Song) => {
+  name: "empty",
+  run: async (Komi, queue: Queue) => {
     let MusicSytem = await MusicData.findOne({
       ServerID: queue.id,
     });
@@ -24,7 +24,6 @@ export const distubeevent: EventDistube = {
         let SongNowStatus;
         let VolumeStatus;
         let LoopStatus;
-        let LoopValue;
         let RequestStatus;
         let VolumeNow;
         let LoopNow;
@@ -32,7 +31,7 @@ export const distubeevent: EventDistube = {
         if (Queue) {
           PlayNow = Queue.songs[0];
           VolumeNow = Queue.volume;
-          LoopNow = Komi.distube.setRepeatMode(queue.textChannel);
+          LoopNow = Queue.repeatMode;
           RequestNow = PlayNow.user;
         } else {
           PlayNow = false;
@@ -63,14 +62,7 @@ export const distubeevent: EventDistube = {
           VolumeStatus = `*${VolumeNow}%*`;
         }
         if (!LoopNow) {
-          if (LoopNow === 0) {
-            LoopValue = "Apagado.";
-          } else if (LoopNow === 1) {
-            LoopValue = "Song";
-          } else if (LoopNow === 2) {
-            LoopValue = "Queue";
-          }
-          LoopStatus = `*${LoopValue}*`;
+          LoopStatus = "*Apagado.*";
         } else {
           LoopStatus = `*${LoopNow}*`;
         }
@@ -102,7 +94,9 @@ export const distubeevent: EventDistube = {
                     inline: true,
                   }
                 )
-                .setImage(`${PlayNow.thumbnail}`)
+                .setImage(
+                  "https://cdn.discordapp.com/attachments/930674284425265182/934614467705192478/standard_1.gif"
+                )
                 .setColor("#4F00FF")
                 .setFooter({
                   text: "Escribe tu canción en el chat.",
@@ -157,21 +151,9 @@ export const distubeevent: EventDistube = {
             ],
           });
         });
-      } else {
-        queue.textChannel.send({
-          embeds: [
-            new MessageEmbed()
-              .setTitle("¡¡¡Reproduciendo!!!")
-              .setDescription(
-                `${Music.Playing} | Reproduciendo ahora: **${song.name}** - \`${song.formattedDuration}\``
-              )
-              .setColor("#5500ff"),
-          ],
-        });
       }
     } else {
       return;
     }
-    console.log("✅");
   },
 };

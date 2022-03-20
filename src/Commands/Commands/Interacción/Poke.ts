@@ -1,7 +1,7 @@
 import { Command } from "../../../interfaces";
 import neko from "nekos.life";
 import { MessageEmbed } from "discord.js";
-import { Util } from "../../../File Data/Util/Emojis.json";
+import { Util } from "../../../Emojis.json";
 const { sfw } = new neko();
 export const command: Command = {
   display: "Poke.ts",

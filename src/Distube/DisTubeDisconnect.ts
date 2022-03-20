@@ -6,7 +6,7 @@ import {
 } from "discord.js";
 import { Queue, Song } from "distube";
 import { EventDistube } from "../interfaces";
-import { Music } from "../File Data/Util/Emojis.json";
+import { Music } from "../Emojis.json";
 const MusicData = require("../Schemas/SchemaMusicSystem");
 export const distubeevent: EventDistube = {
   name: "disconnect",

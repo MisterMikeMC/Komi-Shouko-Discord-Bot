@@ -1,20 +1,19 @@
-// @ts-nocheck
 import { Event, Command } from "../interfaces";
 import {
   Message,
   MessageEmbed,
   MessageActionRow,
   MessageButton,
+  BaseGuildTextChannel,
 } from "discord.js";
-import { Util, Music } from "../File Data/Util/Emojis.json";
-import { OwnerID } from "../File Data/Data/Relevante.json";
+import { Util, Music } from "../Emojis.json";
 import ms from "ms";
 import prms from "pretty-ms";
 import qdb from "quick.db";
-const MusicData = require("../Schemas/SchemaMusicSystem");
+import MusicData from "../Schemas/SchemaMusicSystem";
 export const event: Event = {
   name: "messageCreate",
-  run: async (Komi, message: Message) => {
+  run: async (Komi, message: Message): Promise<Message<boolean>> => {
     /* Declaraciones */
     let Prefix = "k!";
     let MusicaDatos = await MusicData.findOne({
@@ -134,94 +133,94 @@ export const event: Event = {
                 RequestStatus = `*${RequestNow}*`;
               }
 
-              Komi.channels
-                .resolve(MusicChannel)
-                .messages.fetch(MusicMessage)
-                .then((msg) => {
-                  msg.edit({
-                    content: `**Komi Queue:**\n\n${QueueStatus}`,
-                    embeds: [
-                      new MessageEmbed()
-                        .setTitle("¡Komi Music!")
-                        .addFields(
-                          {
-                            name: `Canción en reproducción:`,
-                            value: `${SongNowStatus}`,
-                            inline: false,
-                          },
-                          {
-                            name: `Volumen:`,
-                            value: `${VolumeStatus}`,
-                            inline: true,
-                          },
-                          {
-                            name: `Loop:`,
-                            value: `${LoopStatus}`,
-                            inline: true,
-                          },
-                          {
-                            name: `Pedida por:`,
-                            value: `${RequestStatus}`,
-                            inline: true,
-                          }
-                        )
-                        .setImage(
-                          "https://cdn.discordapp.com/attachments/930674284425265182/934614467705192478/standard_1.gif"
-                        )
-                        .setColor("#4F00FF")
-                        .setFooter({
-                          text: "Escribe tu canción en el chat.",
-                          iconURL: `${Komi.user.displayAvatarURL()}`,
-                        }),
-                    ],
-                    components: [
-                      new MessageActionRow().addComponents(
-                        new MessageButton()
-                          .setCustomId("musicButtonLoop")
-                          .setStyle("SECONDARY")
-                          .setEmoji(`${Music.ID.LoopPlaylist}`),
-                        new MessageButton()
-                          .setCustomId("musicButtonPause")
-                          .setStyle("SECONDARY")
-                          .setEmoji(`${Music.ID.Pause}`),
-                        new MessageButton()
-                          .setCustomId("musicButtonJoin")
-                          .setStyle("SECONDARY")
-                          .setEmoji(`${Music.ID.Stage}`),
-                        new MessageButton()
-                          .setCustomId("musicButtonResume")
-                          .setStyle("SECONDARY")
-                          .setEmoji(`${Music.ID.Play}`),
-                        new MessageButton()
-                          .setCustomId("musicButtonStop")
-                          .setStyle("SECONDARY")
-                          .setEmoji(`${Music.ID.Stop}`)
-                      ),
-                      new MessageActionRow().addComponents(
-                        new MessageButton()
-                          .setCustomId("musicButtonPrevious")
-                          .setStyle("SECONDARY")
-                          .setEmoji(`${Music.ID.Previous}`),
-                        new MessageButton()
-                          .setCustomId("musicButtonVolumeDown")
-                          .setStyle("SECONDARY")
-                          .setEmoji(`${Music.ID.VolumeDown}`),
-                        new MessageButton()
-                          .setCustomId("musicButtonPlayNow")
-                          .setStyle("SECONDARY")
-                          .setEmoji(`${Music.ID.Youtube}`),
-                        new MessageButton()
-                          .setCustomId("musicButtonVolumeUp")
-                          .setStyle("SECONDARY")
-                          .setEmoji(`${Music.ID.VolumeUp}`),
-                        new MessageButton()
-                          .setCustomId("musicButtonSkip")
-                          .setStyle("SECONDARY")
-                          .setEmoji(`${Music.ID.Skip}`)
-                      ),
-                    ],
-                  });
+              let Channel = Komi.channels.resolve(
+                MusicChannel
+              ) as BaseGuildTextChannel;
+              Channel.messages.fetch(MusicMessage).then((msg) => {
+                msg.edit({
+                  content: `**Komi Queue:**\n\n${QueueStatus}`,
+                  embeds: [
+                    new MessageEmbed()
+                      .setTitle("¡Komi Music!")
+                      .addFields(
+                        {
+                          name: `Canción en reproducción:`,
+                          value: `${SongNowStatus}`,
+                          inline: false,
+                        },
+                        {
+                          name: `Volumen:`,
+                          value: `${VolumeStatus}`,
+                          inline: true,
+                        },
+                        {
+                          name: `Loop:`,
+                          value: `${LoopStatus}`,
+                          inline: true,
+                        },
+                        {
+                          name: `Pedida por:`,
+                          value: `${RequestStatus}`,
+                          inline: true,
+                        }
+                      )
+                      .setImage(
+                        "https://cdn.discordapp.com/attachments/930674284425265182/934614467705192478/standard_1.gif"
+                      )
+                      .setColor("#4F00FF")
+                      .setFooter({
+                        text: "Escribe tu canción en el chat.",
+                        iconURL: `${Komi.user.displayAvatarURL()}`,
+                      }),
+                  ],
+                  components: [
+                    new MessageActionRow().addComponents(
+                      new MessageButton()
+                        .setCustomId("musicButtonLoop")
+                        .setStyle("SECONDARY")
+                        .setEmoji(`${Music.ID.LoopPlaylist}`),
+                      new MessageButton()
+                        .setCustomId("musicButtonPause")
+                        .setStyle("SECONDARY")
+                        .setEmoji(`${Music.ID.Pause}`),
+                      new MessageButton()
+                        .setCustomId("musicButtonJoin")
+                        .setStyle("SECONDARY")
+                        .setEmoji(`${Music.ID.Stage}`),
+                      new MessageButton()
+                        .setCustomId("musicButtonResume")
+                        .setStyle("SECONDARY")
+                        .setEmoji(`${Music.ID.Play}`),
+                      new MessageButton()
+                        .setCustomId("musicButtonStop")
+                        .setStyle("SECONDARY")
+                        .setEmoji(`${Music.ID.Stop}`)
+                    ),
+                    new MessageActionRow().addComponents(
+                      new MessageButton()
+                        .setCustomId("musicButtonPrevious")
+                        .setStyle("SECONDARY")
+                        .setEmoji(`${Music.ID.Previous}`),
+                      new MessageButton()
+                        .setCustomId("musicButtonVolumeDown")
+                        .setStyle("SECONDARY")
+                        .setEmoji(`${Music.ID.VolumeDown}`),
+                      new MessageButton()
+                        .setCustomId("musicButtonPlayNow")
+                        .setStyle("SECONDARY")
+                        .setEmoji(`${Music.ID.Youtube}`),
+                      new MessageButton()
+                        .setCustomId("musicButtonVolumeUp")
+                        .setStyle("SECONDARY")
+                        .setEmoji(`${Music.ID.VolumeUp}`),
+                      new MessageButton()
+                        .setCustomId("musicButtonSkip")
+                        .setStyle("SECONDARY")
+                        .setEmoji(`${Music.ID.Skip}`)
+                    ),
+                  ],
                 });
+              });
             }
           }
         }
@@ -236,9 +235,9 @@ export const event: Event = {
         const command = args.shift().toLowerCase();
         let cmd = Komi.commands.get(command) || Komi.aliases.get(command);
         if (cmd) {
-          if (interaction.user.id === "883935912310997073")
+          if (message.author.id === "883935912310997073")
             return message.reply("No tienes permiso de usar mis comandos.");
-          if (message.author.id !== `${OwnerID}`) {
+          if (message.author.id !== "437308398845952001") {
             let CMDCooldownName = `${cmd.cooldown.name}`;
             let CMDCooldownTime = ms(`${cmd.cooldown.time}`);
             let Cooldown = qdb.fetch(`${CMDCooldownName}${message.author.id}`);

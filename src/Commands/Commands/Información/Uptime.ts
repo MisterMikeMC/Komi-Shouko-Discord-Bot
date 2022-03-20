@@ -1,6 +1,6 @@
 import { MessageEmbed } from "discord.js";
 import { Command } from "../../../interfaces";
-import { Util } from "../../../File Data/Util/Emojis.json";
+import { Util } from "../../../Emojis.json";
 export const command: Command = {
   display: "Uptime.ts",
   name: "uptime",
@@ -19,7 +19,6 @@ export const command: Command = {
     const Dias = Math.round(Komi.uptime / 1000 / 60 / 60 / 24);
     const Horas = Math.round(Komi.uptime / 1000 / 60 / 60);
     const Minutos = Math.round(Komi.uptime / 1000 / 60);
-    const Segundos = Math.round(Komi.uptime / 1000);
     message.reply({
       embeds: [
         new MessageEmbed()
@@ -27,7 +26,7 @@ export const command: Command = {
           .setDescription(
             `${Util.Arrow} Llevo en linea: \`${Semanas | 0} W\` \`${
               Dias | 0
-            } D\` \`${Horas | 0} H\` \`${Minutos | 0} M\` \`${Segundos} S\`.`
+            } D\` \`${Horas | 0} H\` \`${Minutos | 0} M\`.`
           )
           .setColor("#00FCFF"),
       ],

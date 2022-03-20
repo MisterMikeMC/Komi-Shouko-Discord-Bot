@@ -7,8 +7,9 @@ const Configs = new Schema({
     type: String,
     default: "k!",
   },
-  KomiInSeverStatus: Boolean,
-  ServerMessageJoin: Boolean,
+  ServerMessageJoin: {
+    type: Boolean,
+    default: false,
+  },
 });
-
-module.exports = model("KomiServerData", Configs);
+export default model("KomiServerData", Configs);

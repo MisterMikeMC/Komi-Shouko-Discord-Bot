@@ -7,4 +7,4 @@ const Music = new Schema({
   MusicMessage: String,
 });
 
-module.exports = model("KomiMusic", Music);
+export default model("KomiMusic", Music);

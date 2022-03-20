@@ -1,12 +1,12 @@
-import { MessageEmbed } from "discord.js";
+import { BaseGuildTextChannel, MessageEmbed } from "discord.js";
 import { Event } from "../interfaces";
 export const event: Event = {
   name: "guildMemberAdd",
-  run: async (Komi, member) => {
+  run: async (Komi, member): Promise<void> => {
     if (member.guild.id === "887356477222834196") {
       if (!member.bot) {
-        //@ts-ignore
-        Komi.channels.resolve("887396817422131270").send({
+        let Channel = Komi.channels.resolve("887396817422131270") as BaseGuildTextChannel
+        Channel.send({
           embeds: [
             new MessageEmbed()
               .setTitle("Bye bye~")

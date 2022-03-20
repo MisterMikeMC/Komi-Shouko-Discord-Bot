@@ -1,6 +1,6 @@
 import { Command } from "../../../interfaces";
 import { MessageEmbed } from "discord.js";
-import { Util } from "../../../File Data/Util/Emojis.json";
+import { Util } from "../../../Emojis.json";
 import neko from "nekos.life";
 const { sfw } = new neko();
 export const command: Command = {

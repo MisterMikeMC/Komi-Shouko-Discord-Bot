@@ -1,6 +1,6 @@
 import { MessageActionRow, MessageButton, MessageEmbed } from "discord.js";
 import { Command } from "../../../interfaces";
-import { Util } from "../../../File Data/Util/Emojis.json";
+import { Util } from "../../../Emojis.json";
 const Music = require("../../../Schemas/SchemaMusicSystem");
 export const command: Command = {
   display: "Setup.ts",
@@ -15,7 +15,7 @@ export const command: Command = {
   },
   onlyOwner: false,
   maintenance: false,
-  run: async (Komi, message, args) => {
+  run: async (Komi, message, args): Promise<void> => {
     let MusicaDatos = await Music.findOne({ ServerID: message.guild.id });
     if (!MusicaDatos) {
       let DataMusic = new Music({

@@ -1,13 +1,15 @@
 import {
+  BaseGuildTextChannel,
   CommandInteractionOptionResolver,
+  GuildMember,
   Interaction,
   MessageActionRow,
   MessageButton,
   MessageEmbed,
 } from "discord.js";
 import { Event } from "../interfaces";
-import { Util, Music, Meme } from "../File Data/Util/Emojis.json";
-import { ExtendedInteraction } from "../SlashCommandsInterface/SlashCommands";
+import { Util, Music, Meme } from "../Emojis.json";
+import { ExtendedInteraction } from "../interfaces/SlashCommandsInterface";
 import ms from "ms";
 import prms from "pretty-ms";
 import qdb from "quick.db";
@@ -15,6 +17,7 @@ const MusicData = require("../Schemas/SchemaMusicSystem");
 export const event: Event = {
   name: "interactionCreate",
   run: async (Komi, interaction: Interaction) => {
+    let InteractionMember = interaction.member as GuildMember 
     if (interaction.isCommand()) {
       const SlashCommand = Komi.slashcommands.get(interaction.commandName);
       if (!SlashCommand) {
@@ -66,17 +69,14 @@ export const event: Event = {
           });
           return;
         }
-        //@ts-ignore
-        if (!interaction.member.roles.cache.has("888224970403106856")) {
-          //@ts-ignore
-          interaction.member.roles.add("888224970403106856");
+        if (!InteractionMember.roles.cache.has("888224970403106856")) {
+          InteractionMember.roles.add("888224970403106856");
           interaction.reply({
             content: `${Meme.RemHate} | Has obtenido el rol de <@&888224970403106856>`,
             ephemeral: true,
           });
         } else {
-          //@ts-ignore
-          interaction.member.roles.remove("888224970403106856");
+          InteractionMember.roles.remove("888224970403106856");
           interaction.reply({
             content: `${Meme.RamHate} | Se te ha removido el rol de <@&888224970403106856>`,
             ephemeral: true,
@@ -219,8 +219,8 @@ export const event: Event = {
           } else {
             QueueStatus = `${Queue.songs
               .map(
-                (QueueSong, i) =>
-                  `\`${i + 1}\`.- __${QueueSong.name}__ - \`${
+                (QueueSong, index) =>
+                  `\`${index + 1}\`.- __${QueueSong.name}__ - \`${
                     QueueSong.formattedDuration
                   }\``
               )
@@ -255,10 +255,8 @@ export const event: Event = {
             let MusicChannel = MusicSytem.MusicChannel;
             let MusicMessage = MusicSytem.MusicMessage;
             if (MusicChannel && MusicMessage) {
-              // @ts-ignore
-              Komi.channels
-                .resolve(MusicChannel)
-                .messages.fetch(MusicMessage)
+              let Channel = Komi.channels.resolve(MusicChannel) as BaseGuildTextChannel
+              Channel.messages.fetch(MusicMessage)
                 .then((msg) => {
                   msg.edit({
                     content: `**Komi Queue:**\n\n${QueueStatus}`,
@@ -348,8 +346,7 @@ export const event: Event = {
           await interaction.deferUpdate();
         } else if (ID === "musicButtonJoin") {
           if (!interaction.guild.me.voice.channel) {
-            // @ts-ignore
-            let voiceChannel = interaction.member?.voice.channel;
+            let voiceChannel = InteractionMember?.voice.channel;
             if (!voiceChannel) {
               interaction.reply({
                 embeds: [
@@ -406,8 +403,7 @@ export const event: Event = {
                 }
               }
             }
-            // @ts-ignore
-            let voiceChannel = interaction.member?.voice.channel;
+            let voiceChannel = InteractionMember?.voice.channel;
             if (!voiceChannel) {
               interaction.reply({
                 embeds: [

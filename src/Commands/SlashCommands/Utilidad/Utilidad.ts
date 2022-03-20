@@ -1,6 +1,6 @@
 import { GuildMember } from "discord.js";
-import { SlashCommandStructure } from "../../../SlashCommandsInterface/SlashCommandStructure";
-import { Util } from "../../../File Data/Util/Emojis.json";
+import { SlashCommandStructure } from "../../../interfaces/SlashCommand";
+import { Util } from "../../../Emojis.json";
 export default new SlashCommandStructure({
   name: "utilidad",
   description: "Sub SlashCommands de Utilidad.",
@@ -19,7 +19,7 @@ export default new SlashCommandStructure({
       ],
     },
   ],
-  run: async ({ Komi, interaction }) => {
+  run: async ({ Komi, interaction }): Promise<void> => {
     if (interaction.options.getSubcommand() === "say") {
       let Message = interaction.options.getString("mensaje");
       let InteractionMember = interaction.member as GuildMember;

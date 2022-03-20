@@ -1,11 +1,11 @@
 import { MessageActionRow, MessageButton, MessageEmbed } from "discord.js";
-import { SlashCommandStructure } from "../../../SlashCommandsInterface/SlashCommandStructure";
+import { SlashCommandStructure } from "../../../interfaces/SlashCommand";
 import {
   Ping,
   Util,
   KomiShouko,
   Badge,
-} from "../../../File Data/Util/Emojis.json";
+} from "../../../Emojis.json";
 export default new SlashCommandStructure({
   name: "informacion",
   description: "Sub SlashCommands de Información.",

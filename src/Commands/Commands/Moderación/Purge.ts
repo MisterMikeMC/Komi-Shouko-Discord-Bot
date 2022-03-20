@@ -1,6 +1,6 @@
 import { GuildTextBasedChannel, MessageEmbed } from "discord.js";
 import { Command } from "../../../interfaces";
-import { Util } from "../../../File Data/Util/Emojis.json";
+import { Util } from "../../../Emojis.json";
 export const command: Command = {
   display: "Purge.ts",
   name: "purge",

@@ -1,6 +1,6 @@
 import { MessageEmbed } from "discord.js";
 import { Command } from "../../../interfaces";
-import { Ping } from "../../../File Data/Util/Emojis.json";
+import { Ping } from "../../../Emojis.json";
 export const command: Command = {
   display: "Ping.ts",
   name: "ping",
