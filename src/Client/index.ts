@@ -91,6 +91,7 @@ export default class Komi extends Client {
       this.on(event.name, event.run.bind(null, this));
     });
     /* Distube Event Handler */
+    /*
     const Options = {
       emitAddSongWhenCreatingQueue: false,
       emitAddListWhenCreatingQueue: false,
@@ -111,6 +112,7 @@ export default class Komi extends Client {
       this.distubeevent.set(distubeevent.name, distubeevent);
       this.distube.on(distubeevent.name, distubeevent.run.bind(null, this));
     });
+    */
   }
   /* Slash Command */
   async importFile(filePath: string): Promise<any> {

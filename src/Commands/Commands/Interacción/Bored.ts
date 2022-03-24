@@ -2,7 +2,6 @@ import { Command } from "../../../interfaces";
 import { bored } from "random-gif-api";
 import { MessageEmbed } from "discord.js";
 export const command: Command = {
-  display: "Bored.ts",
   name: "bored",
   aliases: [],
   description: "Demuestra tu aburrimiento.",
@@ -14,8 +13,8 @@ export const command: Command = {
   },
   onlyOwner: false,
   maintenance: false,
-  run: async (Komi, message, args) => {
-    bored().then((img) => {
+  run: async (Komi, message, args): Promise<void> => {
+    bored().then((img): void => {
       message.reply({
         embeds: [
           new MessageEmbed()

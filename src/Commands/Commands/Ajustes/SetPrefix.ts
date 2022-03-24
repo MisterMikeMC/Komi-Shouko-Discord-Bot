@@ -3,7 +3,6 @@ import { Command } from "../../../interfaces";
 import { Util } from "../../../Emojis.json";
 import ServersData from "../../../Schemas/SchemaServerData";
 export const command: Command = {
-  display: "SetPrefix.ts",
   name: "setprefix",
   aliases: ["set-prefix"],
   description: "Cambia el prefix de Komi en tu servidor.",

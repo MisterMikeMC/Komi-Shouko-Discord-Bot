@@ -15,7 +15,7 @@ export const command: Command = {
   },
   onlyOwner: false,
   maintenance: false,
-  run: async (Komi, message, args) => {
+  run: async (Komi, message, args): Promise<void> => {
     let Usuario = message.mentions.users.first();
     if (!Usuario) {
       message.reply({
@@ -45,7 +45,7 @@ export const command: Command = {
       });
       return;
     }
-    bite().then((img) => {
+    bite().then((img): void => {
       message.reply({
         embeds: [
           new MessageEmbed()

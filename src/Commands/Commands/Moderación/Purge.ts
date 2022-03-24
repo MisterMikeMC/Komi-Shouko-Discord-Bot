@@ -2,7 +2,6 @@ import { GuildTextBasedChannel, MessageEmbed } from "discord.js";
 import { Command } from "../../../interfaces";
 import { Util } from "../../../Emojis.json";
 export const command: Command = {
-  display: "Purge.ts",
   name: "purge",
   aliases: ["clear", "bulkdelete", "nuke"],
   description: "Elemina una cantidad de mensajes.",

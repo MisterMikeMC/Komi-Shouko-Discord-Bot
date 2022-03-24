@@ -1,10 +1,9 @@
 import { Command } from "../../../interfaces";
-import neko from "nekos.life";
 import { MessageEmbed } from "discord.js";
 import { Util } from "../../../Emojis.json";
-const { sfw } = new neko();
+import NekosClient from 'nekos.life';
+const { sfw } = new NekosClient();
 export const command: Command = {
-  display: "Poke.ts",
   name: "poke",
   aliases: [],
   description: "Molesta a alguien hasta colmar su paciencia.",
@@ -16,7 +15,7 @@ export const command: Command = {
   },
   onlyOwner: false,
   maintenance: false,
-  run: async (Komi, message, args) => {
+  run: async (Komi, message, args): Promise<void> => {
     let Usuario = message.mentions.users.first();
     if (!Usuario) {
       message.reply({
@@ -46,7 +45,7 @@ export const command: Command = {
       });
       return;
     }
-    sfw.poke().then((img) => {
+    sfw.poke().then((img): void => {
       message.reply({
         embeds: [
           new MessageEmbed()

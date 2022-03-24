@@ -1,10 +1,9 @@
 import { Command } from "../../../interfaces";
 import { MessageEmbed } from "discord.js";
 import { Util } from "../../../Emojis.json";
-import neko from "nekos.life";
-const { sfw } = new neko();
+import NekosClient from 'nekos.life';
+const { sfw } = new NekosClient();
 export const command: Command = {
-  display: "Slap.ts",
   name: "slap",
   aliases: [],
   description: "Dale una bofetada a alguien.",
@@ -16,7 +15,7 @@ export const command: Command = {
   },
   onlyOwner: false,
   maintenance: false,
-  run: async (Komi, message, args) => {
+  run: async (Komi, message, args): Promise<void> => {
     let Usuario = message.mentions.users.first();
     if (!Usuario) {
       message.reply({
@@ -46,7 +45,7 @@ export const command: Command = {
       });
       return;
     }
-    sfw.slap().then((img) => {
+    sfw.slap().then((img): void => {
       message.reply({
         embeds: [
           new MessageEmbed()

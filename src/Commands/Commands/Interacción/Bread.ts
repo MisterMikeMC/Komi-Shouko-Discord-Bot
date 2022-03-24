@@ -3,7 +3,6 @@ import { bread } from "random-gif-api";
 import { MessageEmbed } from "discord.js";
 import { Util } from "../../../Emojis.json";
 export const command: Command = {
-  display: "Bread.ts",
   name: "bread",
   aliases: [],
   description: "Dale pan a alguien.",
@@ -15,7 +14,7 @@ export const command: Command = {
   },
   onlyOwner: false,
   maintenance: false,
-  run: async (Komi, message, args) => {
+  run: async (Komi, message, args): Promise<void> => {
     let Usuario = message.mentions.users.first();
     if (!Usuario) {
       message.reply({
@@ -45,7 +44,7 @@ export const command: Command = {
       });
       return;
     }
-    bread().then((img) => {
+    bread().then((img): void => {
       message.reply({
         embeds: [
           new MessageEmbed()

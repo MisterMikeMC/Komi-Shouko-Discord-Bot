@@ -14,8 +14,8 @@ export const command: Command = {
   },
   onlyOwner: false,
   maintenance: false,
-  run: async (Komi, message, args) => {
-    angry().then((img) => {
+  run: async (Komi, message, args): Promise<void> => {
+    angry().then((img): void => {
       message.reply({
         embeds: [
           new MessageEmbed()

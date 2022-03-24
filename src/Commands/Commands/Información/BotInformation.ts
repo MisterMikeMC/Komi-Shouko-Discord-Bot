@@ -2,7 +2,6 @@ import { Command } from "../../../interfaces";
 import { MessageEmbed } from "discord.js";
 import { Util, Badge, DxD } from "../../../Emojis.json";
 export const command: Command = {
-  display: "Komi Info.ts",
   name: "botinfo",
   aliases: [],
   description: "Comando que muestra toda la información relevante de Komi-san.",

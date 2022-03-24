@@ -4,7 +4,6 @@ import { MessageEmbed } from "discord.js";
 import { Util } from "../../../Emojis.json";
 const { sfw } = new neko();
 export const command: Command = {
-  display: "Kiss.ts",
   name: "kiss",
   aliases: [],
   description: "Besa apacionadamente a alguien.",
@@ -16,7 +15,7 @@ export const command: Command = {
   },
   onlyOwner: false,
   maintenance: false,
-  run: async (Komi, message, args) => {
+  run: async (Komi, message, args): Promise<void> => {
     let Usuario = message.mentions.users.first();
     if (!Usuario) {
       message.reply({
@@ -46,7 +45,7 @@ export const command: Command = {
       });
       return;
     }
-    sfw.kiss().then((img) => {
+    sfw.kiss().then((img): void => {
       message.reply({
         embeds: [
           new MessageEmbed()

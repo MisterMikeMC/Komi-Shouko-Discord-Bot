@@ -27,7 +27,7 @@ export default new SlashCommandStructure({
       type: "SUB_COMMAND",
     },
   ],
-  run: async ({ Komi, interaction }) => {
+  run: async ({ Komi, interaction }): Promise<void> => {
     if (interaction.options.getSubcommand() === "ping") {
       let EmojiPing1 = Ping.Ping1;
       let EmojiPing2 = Ping.Ping2;
@@ -151,12 +151,10 @@ export default new SlashCommandStructure({
        */
       let TypeOfHosting: Number = 2;
       let TypeOfHostingMessage: String;
-      let TypeOfHostingMessage1 = `> ${Util.Arrow} ${Util.Replit} [Repl.it](https://replit.com).\n> ${Util.Arrow} ${Util.Uptimerobot} [Uptimerobot](https://uptimerobot.com).`;
-      let TypeOfHostingMessage2 = `> ${Util.Arrow} ${Util.VisualStudioCodeInsider} [Visual Studio Code](https://code.visualstudio.com/insiders/).\n> ${Util.Arrow} ${Util.Terminal} [Terminal](https://www.microsoft.com/es-mx/p/windows-terminal/9n0dx20hk701).`;
       if (TypeOfHosting === 1) {
-        TypeOfHostingMessage = TypeOfHostingMessage1;
+        TypeOfHostingMessage = `> ${Util.Arrow} ${Util.Replit} [Repl.it](https://replit.com).\n> ${Util.Arrow} ${Util.Uptimerobot} [Uptimerobot](https://uptimerobot.com).`;
       } else if (TypeOfHosting === 2) {
-        TypeOfHostingMessage = TypeOfHostingMessage2;
+        TypeOfHostingMessage = `> ${Util.Arrow} ${Util.VisualStudioCodeInsider} [Visual Studio Code](https://code.visualstudio.com/insiders/).\n> ${Util.Arrow} ${Util.Terminal} [Terminal](https://www.microsoft.com/es-mx/p/windows-terminal/9n0dx20hk701).`;
       }
       const roleColor =
         interaction.guild.me.displayHexColor === "#000000"

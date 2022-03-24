@@ -2,7 +2,6 @@ import { MessageActionRow, MessageButton, MessageEmbed } from "discord.js";
 import { SlashCommandStructure } from "../../../interfaces/SlashCommand";
 import { Util } from "../../../Emojis.json";
 import { inspect } from "util";
-import pms from "pretty-ms";
 export default new SlashCommandStructure({
   name: "owner",
   description: "Sub SlashCommands de Owner.",
@@ -48,7 +47,7 @@ export default new SlashCommandStructure({
       ],
     },
   ],
-  run: async ({ Komi, interaction }) => {
+  run: async ({ Komi, interaction }): Promise<void> => {
     if (interaction.user.id !== "437308398845952001") {
       interaction.reply({
         embeds: [

@@ -6,7 +6,6 @@ interface Run {
 }
 
 export interface Command {
-  display: string;
   name: string;
   aliases: string[];
   description: string;

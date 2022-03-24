@@ -1,7 +1,6 @@
 import { Command } from "../../../interfaces";
 import { Util } from "../../../Emojis.json";
 export const command: Command = {
-  display: "Clear Console.ts",
   name: "cls",
   aliases: [],
   description: "Has un console.clear().",

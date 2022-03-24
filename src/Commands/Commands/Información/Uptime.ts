@@ -2,7 +2,6 @@ import { MessageEmbed } from "discord.js";
 import { Command } from "../../../interfaces";
 import { Util } from "../../../Emojis.json";
 export const command: Command = {
-  display: "Uptime.ts",
   name: "uptime",
   aliases: ["online-time"],
   description: "Revisa cuanto tiempo lleva Komi-san en linea.",

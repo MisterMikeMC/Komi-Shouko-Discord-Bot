@@ -2,7 +2,6 @@ import { MessageEmbed } from "discord.js";
 import { Command } from "../../../interfaces";
 import { Ping } from "../../../Emojis.json";
 export const command: Command = {
-  display: "Ping.ts",
   name: "ping",
   aliases: ["latency"],
   description: "Muestra el ping de Komi-san.",

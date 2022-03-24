@@ -2,7 +2,6 @@ import { Command } from "../../../interfaces";
 import { happy } from "random-gif-api";
 import { MessageEmbed } from "discord.js";
 export const command: Command = {
-  display: "Happy.ts",
   name: "happy",
   aliases: [],
   description: "Demuestra los pasos prohibidos.",
@@ -14,8 +13,8 @@ export const command: Command = {
   },
   onlyOwner: false,
   maintenance: false,
-  run: async (Komi, message, args) => {
-    happy().then((img) => {
+  run: async (Komi, message, args): Promise<void> => {
+    happy().then((img): void => {
       message.reply({
         embeds: [
           new MessageEmbed()

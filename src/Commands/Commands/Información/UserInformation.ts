@@ -3,7 +3,6 @@ import { MessageEmbed } from "discord.js";
 import { Command } from "../../../interfaces";
 import { Util } from "../../../Emojis.json";
 export const command: Command = {
-  display: "UserInfo.ts",
   name: "userinfo",
   aliases: ["user-info"],
   description: "Mira la información de un usuario.",

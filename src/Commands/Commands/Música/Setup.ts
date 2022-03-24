@@ -3,7 +3,6 @@ import { Command } from "../../../interfaces";
 import { Util } from "../../../Emojis.json";
 const Music = require("../../../Schemas/SchemaMusicSystem");
 export const command: Command = {
-  display: "Setup.ts",
   name: "setup",
   aliases: [],
   description: "Crea un canal para la musica de Komi.",

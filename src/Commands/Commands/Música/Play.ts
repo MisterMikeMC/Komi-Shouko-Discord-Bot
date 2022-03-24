@@ -2,7 +2,6 @@ import { Command } from "../../../interfaces";
 import { Util } from "../../../Emojis.json";
 import { MessageEmbed } from "discord.js";
 export const command: Command = {
-  display: "Play.ts",
   name: "play",
   aliases: ["p"],
   description: "Reproduce música en un canal de voz.",
