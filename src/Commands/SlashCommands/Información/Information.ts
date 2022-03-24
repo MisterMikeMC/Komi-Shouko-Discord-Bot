@@ -7,7 +7,7 @@ import {
   Badge,
 } from "../../../Emojis.json";
 export default new SlashCommandStructure({
-  name: "informacion",
+  name: "información",
   description: "Sub SlashCommands de Información.",
   options: [
     {
@@ -186,7 +186,7 @@ export default new SlashCommandStructure({
               },
               {
                 name: `${Util.WindL} Caracteristicas de desarrollo: ${Util.WindR}`,
-                value: `> ${Util.Arrow} ${KomiShouko.KomiMaidExcited} **Fecha de Creación:** <t:1628722800>.\n> ${Util.Arrow} ${Util.TypeScript} **Lenguaje usado:** TypeScript\n> ${Util.Arrow} ${Util.Discordjs} **Libreria usada:** Discord.js v13.6.0\n> ${Util.Arrow} ${Util.MongoDB} **Database:** MongoDB v4.4.11\n> ${Util.Arrow} ${Util.NodeJS} **Entorno de ejecución:** NodeJS v16.10.0`,
+                value: `> ${Util.Arrow} ${KomiShouko.KomiMaidExcited} **Fecha de Creación:** <t:1628722800>.\n> ${Util.Arrow} ${Util.TypeScript} **Lenguaje usado:** TypeScript\n> ${Util.Arrow} ${Util.Discordjs} **Libreria usada:** Discord.js v13.6.0\n> ${Util.Arrow} ${Util.MongoDB} **Database:** MongoDB v4.4.11\n> ${Util.Arrow} ${Util.NodeJS} **Entorno de ejecución:** NodeJS v16.14.0`,
                 inline: false,
               },
               {
