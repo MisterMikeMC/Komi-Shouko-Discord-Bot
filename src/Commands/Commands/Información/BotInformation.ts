@@ -1,6 +1,6 @@
 import { Command } from "../../../interfaces";
 import { MessageEmbed } from "discord.js";
-import { Util, Badge, DxD } from "../../../Emojis.json";
+import { Util, Badge, DxD } from "../../../Data/Emojis.json";
 export const command: Command = {
   name: "botinfo",
   aliases: [],

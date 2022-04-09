@@ -1,5 +1,5 @@
 import { Command } from "../../../interfaces";
-import { Util } from "../../../Emojis.json";
+import { Util } from "../../../Data/Emojis.json";
 import { MessageEmbed } from "discord.js";
 export const command: Command = {
   name: "play",

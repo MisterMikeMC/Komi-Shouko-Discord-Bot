@@ -1,7 +1,7 @@
 import { Command } from "../../../interfaces";
 import { bread } from "random-gif-api";
 import { MessageEmbed } from "discord.js";
-import { Util } from "../../../Emojis.json";
+import { Util } from "../../../Data/Emojis.json";
 export const command: Command = {
   name: "bread",
   aliases: [],

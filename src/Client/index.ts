@@ -4,13 +4,11 @@ import {
   Collection,
 } from "discord.js";
 import { readdirSync } from "fs";
-import { SpotifyPlugin } from "@distube/spotify";
 import { connect } from "mongoose";
 import { promisify } from "util";
 import { Command, Event, EventDistube, Snipe } from "../interfaces";
 import { SlashCommandsRegisterOptions } from "../interfaces/SlashCommandsRegisterOptions";
 import { CommandType } from "../interfaces/SlashCommandsInterface";
-import Distube from "distube";
 import glob from "glob";
 import path from "path";
 const globPromise = promisify(glob);
@@ -19,10 +17,9 @@ export default class Komi extends Client {
   public aliases: Collection<string, Command> = new Collection();
   public slashcommands: Collection<string, CommandType> = new Collection();
   public events: Collection<string, Event> = new Collection();
+  public distube: any;
   public distubeevent: Collection<string, EventDistube> = new Collection();
   public snipe: Map<string, Snipe> = new Map();
-  public distube: any;
-  static distube: any;
   constructor() {
     super({
       intents: [
@@ -58,7 +55,7 @@ export default class Komi extends Client {
       useNewUrlParser: true,
     })
       .then((): void => {
-        console.log("Conectada a MongoDB ✅");
+        console.log("Conectada a MongoDB ✅");        
       })
       .catch((ErrorForConectionToDatabase): void => {
         console.log(

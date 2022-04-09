@@ -1,6 +1,6 @@
 import { Command } from "../../../interfaces";
 import { MessageEmbed } from "discord.js";
-import { Util } from "../../../Emojis.json";
+import { Util } from "../../../Data/Emojis.json";
 import NekosClient from 'nekos.life';
 const { sfw } = new NekosClient();
 export const command: Command = {

@@ -1,12 +1,11 @@
 import { Event } from "../interfaces";
-import { MusicManger, RandomPositionOfArray } from "../Functions";
-import chalk from "chalk";
+import { RandomPositionOfArray } from "../Functions";
+import { magentaBright } from "chalk";
 export const event: Event = {
   name: "ready",
-  run: (Komi) => {
-
-    setInterval(() => {
-      const Estados = [
+  run: (Komi): void => {
+    setInterval((): void => {
+      let Status = [
         { name: `Mencioname por ayuda.`, type: 1 },
         { name: `Probando mis ${Komi.commands.size} Comandos`, type: 1 },
         {
@@ -23,17 +22,18 @@ export const event: Event = {
         { name: `En desarrollo.`, type: 1 },
         { name: `Viendo a MrMikeMC.`, type: 1 },
         { name: `Jugando con TypeScript.`, type: 1 },
+        { name: `Hitohito Tadano gOd`, type: 1 },
       ];
-      function presence() {
+      let RefreshStatus = (status: object[]): void => {
         Komi.user.setPresence({
           status: "online",
-          activities: [RandomPositionOfArray(Estados)],
+          activities: [RandomPositionOfArray(status)],
         });
-      }
-      presence();
+      };
+      RefreshStatus(Status);
     }, 15000);
     console.log(
-      `${chalk.hex("#BE00FF").bold(`${Komi.user.username}`)} lista ✅`
+      `${magentaBright(`${Komi.user.username}`)} lista ✅`
     );
   },
 };

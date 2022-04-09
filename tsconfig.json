@@ -5,7 +5,7 @@
     "module": "commonjs",
     "lib": ["dom", "ESNext"],
     "allowJs": true,
-    "outDir": "./compiled",
+    "outDir": "./Komipiled",
     "rootDir": "./src",
     "removeComments": false,
     "strict": false,

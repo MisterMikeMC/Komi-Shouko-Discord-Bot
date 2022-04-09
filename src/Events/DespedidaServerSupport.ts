@@ -1,11 +1,13 @@
-import { BaseGuildTextChannel, MessageEmbed } from "discord.js";
+import { BaseGuildTextChannel, GuildMember, MessageEmbed } from "discord.js";
 import { Event } from "../interfaces";
 export const event: Event = {
   name: "guildMemberAdd",
-  run: async (Komi, member): Promise<void> => {
+  run: async (Komi, member: GuildMember): Promise<void> => {
     if (member.guild.id === "887356477222834196") {
-      if (!member.bot) {
-        let Channel = Komi.channels.resolve("887396817422131270") as BaseGuildTextChannel
+      if (!member.user.bot) {
+        let Channel = Komi.channels.resolve(
+          "887396817422131270"
+        ) as BaseGuildTextChannel;
         Channel.send({
           embeds: [
             new MessageEmbed()
@@ -17,9 +19,11 @@ export const event: Event = {
                 "https://cdn.discordapp.com/attachments/880562658401722379/934945897954017310/komi-san-komi-shouko_2.gif"
               )
               .setColor("#FFCC8E")
-              .setThumbnail(member.user.displayAvatarURL({ dynamic: true }))
+              .setThumbnail(
+                `${member.user.displayAvatarURL({ dynamic: true })}`
+              )
               .setFooter({
-                text: `Ahora solo somos ${member.guild.memberCount} Miembros.`,
+                text: `Ahora solo somos ${member.guild.memberCount} miembros.`,
               })
               .setTimestamp(),
           ],

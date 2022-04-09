@@ -1,6 +1,6 @@
 import { MessageEmbed } from "discord.js";
 import { Command } from "../../../interfaces";
-import { Util } from "../../../Emojis.json";
+import { Util } from "../../../Data/Emojis.json";
 import ServersData from "../../../Schemas/SchemaServerData";
 export const command: Command = {
   name: "setprefix",
@@ -15,15 +15,38 @@ export const command: Command = {
   onlyOwner: false,
   maintenance: false,
   run: async (Komi, message, args): Promise<void> => {
+
+
+
     let ServerData = await ServersData.findOne({
-      ServerID: message.guild.id,
+      ServerID: message.guild.id
     });
-    if (!ServerData) return;
+
+
+    if (!ServerData) {
+      message.react(`${Util.No}`);
+      return;
+    }
+
+
+
     let UserPerms =
       message.member.permissions.has("ADMINISTRATOR") ||
       message.member.permissions.has("MANAGE_GUILD");
+
+    console.log(UserPerms);
+    return;
+
+
     if (message.author.id !== "437308398845952001") {
+
+
+
+
       if (!UserPerms) {
+
+
+
         message.reply({
           embeds: [
             new MessageEmbed()
@@ -31,11 +54,27 @@ export const command: Command = {
               .setColor("#990000"),
           ],
         });
+
         return;
+
+
+
+
       }
+
+
+
+
     }
+
+
+
     let Prefix = args[0];
     if (!Prefix) {
+
+
+
+
       message.reply({
         embeds: [
           new MessageEmbed()
@@ -46,7 +85,15 @@ export const command: Command = {
         ],
       });
       return;
+
+
+
+
     } else if (Prefix.length > 4) {
+
+
+
+
       message.reply({
         embeds: [
           new MessageEmbed()
@@ -58,6 +105,10 @@ export const command: Command = {
       });
       return;
     }
+
+
+
+
     const Regex = /\p{Emoji}/gu.test(message.content);
     if (Regex) {
       message.reply({
@@ -68,6 +119,9 @@ export const command: Command = {
       });
       return;
     }
+
+
+
     await ServersData.findOneAndUpdate(
       {
         ServerID: message.guild.id,
@@ -76,6 +130,11 @@ export const command: Command = {
         ServerPrefix: Prefix,
       }
     );
+
+
+
+
+
     message.reply({
       embeds: [
         new MessageEmbed()
@@ -85,5 +144,10 @@ export const command: Command = {
           .setColor("#009900"),
       ],
     });
+
+
+
+
+
   },
 };

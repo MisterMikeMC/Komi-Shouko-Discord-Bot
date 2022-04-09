@@ -1,6 +1,6 @@
 import { MessageEmbed } from "discord.js";
 import { Command } from "../../../interfaces";
-import { Ping } from "../../../Emojis.json";
+import { Ping } from "../../../Data/Emojis.json";
 export const command: Command = {
   name: "ping",
   aliases: ["latency"],

@@ -2,7 +2,6 @@ import { Command } from "../../../interfaces";
 import { angry } from "random-gif-api";
 import { MessageEmbed } from "discord.js";
 export const command: Command = {
-  display: "Angry.ts",
   name: "angry",
   aliases: ["rage"],
   description: "Ponte furioso.",

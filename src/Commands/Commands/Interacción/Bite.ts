@@ -1,9 +1,8 @@
 import { Command } from "../../../interfaces";
 import { bite } from "random-gif-api";
 import { MessageEmbed } from "discord.js";
-import { Util } from "../../../Emojis.json";
+import { Util } from "../../../Data/Emojis.json";
 export const command: Command = {
-  display: "Bite.ts",
   name: "bite",
   aliases: [],
   description: "Muerde a alguien.",

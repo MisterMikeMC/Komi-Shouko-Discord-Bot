@@ -1,11 +1,6 @@
 import { MessageActionRow, MessageButton, MessageEmbed } from "discord.js";
 import { SlashCommandStructure } from "../../../interfaces/SlashCommand";
-import {
-  Ping,
-  Util,
-  KomiShouko,
-  Badge,
-} from "../../../Emojis.json";
+import { Ping, Util, KomiShouko, Badge } from "../../../Data/Emojis.json";
 export default new SlashCommandStructure({
   name: "información",
   description: "Sub SlashCommands de Información.",
@@ -36,20 +31,20 @@ export default new SlashCommandStructure({
       let EmojiPing5 = Ping.Ping5;
       let PingEmojiFinal1;
       let PingEmojiFinal2;
-      let PingRespuesta = Date.now() - interaction.createdTimestamp;
-      let PingApi = Komi.ws.ping;
+      let PingResponse = Date.now() - interaction.createdTimestamp;
+      let PingApi = Komi.ws.ping;      
       let Color;
-      if (PingRespuesta <= 60) {
+      if (PingResponse <= 60) {
         PingEmojiFinal1 = EmojiPing5;
-      } else if (PingRespuesta >= 61 && PingRespuesta <= 100) {
+      } else if (PingResponse >= 61 && PingResponse <= 100) {
         PingEmojiFinal1 = EmojiPing4;
-      } else if (PingRespuesta >= 101 && PingRespuesta <= 150) {
+      } else if (PingResponse >= 101 && PingResponse <= 150) {
         PingEmojiFinal1 = EmojiPing3;
-      } else if (PingRespuesta >= 151 && PingRespuesta <= 200) {
+      } else if (PingResponse >= 151 && PingResponse <= 200) {
         PingEmojiFinal1 = EmojiPing2;
-      } else if (PingRespuesta >= 201) {
+      } else if (PingResponse >= 201) {
         PingEmojiFinal1 = EmojiPing1;
-      } else if (PingRespuesta < 0) {
+      } else if (PingResponse < 0) {
         PingEmojiFinal1 = EmojiPing1;
       }
       if (PingApi <= 60) {
@@ -67,7 +62,7 @@ export default new SlashCommandStructure({
       } else if (PingApi >= 201) {
         PingEmojiFinal2 = EmojiPing1;
         Color = "#930000";
-      } else if (PingRespuesta < 0) {
+      } else if (PingResponse < 0) {
         PingEmojiFinal2 = EmojiPing1;
         Color = "#930000";
       }
@@ -78,7 +73,7 @@ export default new SlashCommandStructure({
             .addFields(
               {
                 name: `${Util.WindL} Ping de Respuesta: ${Util.WindL}`,
-                value: `> ¡**__${PingRespuesta}__** ms! ${PingEmojiFinal1}`,
+                value: `> ¡**__${PingResponse}__** ms! ${PingEmojiFinal1}`,
                 inline: false,
               },
               {

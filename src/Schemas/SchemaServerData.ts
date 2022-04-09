@@ -10,6 +10,7 @@ const Configs = new Schema({
   ServerMessageJoin: {
     type: Boolean,
     default: false,
-  },
+  },  
 });
+
 export default model("KomiServerData", Configs);

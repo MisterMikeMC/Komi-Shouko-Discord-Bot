@@ -8,7 +8,7 @@ import {
   MessageEmbed,
 } from "discord.js";
 import { Event } from "../interfaces";
-import { Util, Music, Meme } from "../Emojis.json";
+import { Util, Music, Meme } from "../Data/Emojis.json";
 import { ExtendedInteraction } from "../interfaces/SlashCommandsInterface";
 import ms from "ms";
 import prms from "pretty-ms";

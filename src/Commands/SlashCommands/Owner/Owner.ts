@@ -1,6 +1,6 @@
 import { MessageActionRow, MessageButton, MessageEmbed } from "discord.js";
 import { SlashCommandStructure } from "../../../interfaces/SlashCommand";
-import { Util } from "../../../Emojis.json";
+import { Util } from "../../../Data/Emojis.json";
 import { inspect } from "util";
 export default new SlashCommandStructure({
   name: "owner",
