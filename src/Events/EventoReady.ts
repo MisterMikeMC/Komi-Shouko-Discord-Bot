@@ -1,6 +1,7 @@
 import { Event } from "../interfaces";
 import { RandomPositionOfArray } from "../Functions";
 import { magentaBright } from "chalk";
+import { rainbow } from "chalk-animation";
 export const event: Event = {
   name: "ready",
   run: (Komi): void => {
@@ -32,8 +33,8 @@ export const event: Event = {
       };
       RefreshStatus(Status);
     }, 15000);
-    console.log(
-      `${magentaBright(`${Komi.user.username}`)} lista ✅`
-    );
+    setTimeout(() => {
+      rainbow("Komi Shouko lista ✅").start();
+    }, 500);
   },
 };

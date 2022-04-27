@@ -1,6 +1,7 @@
 import { MessageActionRow, MessageButton, MessageEmbed } from "discord.js";
 import { SlashCommandStructure } from "../../../interfaces/SlashCommand";
 import { Ping, Util, KomiShouko, Badge } from "../../../Data/Emojis.json";
+import mongoose from "mongoose";
 export default new SlashCommandStructure({
   name: "información",
   description: "Sub SlashCommands de Información.",
@@ -31,8 +32,17 @@ export default new SlashCommandStructure({
       let EmojiPing5 = Ping.Ping5;
       let PingEmojiFinal1;
       let PingEmojiFinal2;
+      let PingEmojiFinal3;
       let PingResponse = Date.now() - interaction.createdTimestamp;
-      let PingApi = Komi.ws.ping;      
+      let PingApi = Komi.ws.ping;
+      let PreDate = Date.now();
+      let PingMongoDB = await new Promise((r, j): void => {
+        mongoose.connection.db
+          .admin()
+          .ping((err, result): void =>
+            err || !result ? j(err || result) : r(Date.now() - PreDate)
+          );
+      });
       let Color;
       if (PingResponse <= 60) {
         PingEmojiFinal1 = EmojiPing5;
@@ -46,6 +56,17 @@ export default new SlashCommandStructure({
         PingEmojiFinal1 = EmojiPing1;
       } else if (PingResponse < 0) {
         PingEmojiFinal1 = EmojiPing1;
+      }
+      if (PingMongoDB <= 60) {
+        PingEmojiFinal3 = EmojiPing5;
+      } else if (PingMongoDB >= 61 && PingMongoDB <= 100) {
+        PingEmojiFinal3 = EmojiPing4;
+      } else if (PingMongoDB >= 101 && PingMongoDB <= 150) {
+        PingEmojiFinal3 = EmojiPing3;
+      } else if (PingMongoDB >= 151 && PingMongoDB <= 200) {
+        PingEmojiFinal3 = EmojiPing2;
+      } else if (PingMongoDB >= 201) {
+        PingEmojiFinal3 = EmojiPing1;
       }
       if (PingApi <= 60) {
         PingEmojiFinal2 = EmojiPing5;
@@ -66,23 +87,29 @@ export default new SlashCommandStructure({
         PingEmojiFinal2 = EmojiPing1;
         Color = "#930000";
       }
+
       interaction.reply({
         embeds: [
           new MessageEmbed()
             .setTitle("¡Ping de Komi-san!")
             .addFields(
               {
-                name: `${Util.WindL} Ping de Respuesta: ${Util.WindL}`,
+                name: `${Util.WindL} \`Ping de Respuesta:\` ${Util.WindR}`,
                 value: `> ¡**__${PingResponse}__** ms! ${PingEmojiFinal1}`,
                 inline: false,
               },
               {
-                name: `${Util.WindL} Ping de la API: ${Util.WindL}`,
+                name: `${Util.WindL} \`Ping de la API:\` ${Util.WindR}`,
                 value: `> ¡**__${PingApi}__** ms! ${PingEmojiFinal2}`,
                 inline: false,
               },
               {
-                name: `${Util.WindL} Ram usada: ${Util.WindL}`,
+                name: `${Util.WindL} \`Ping de MongoDB:\` ${Util.WindR}`,
+                value: `> ¡**__${PingMongoDB}__** ms! ${PingEmojiFinal3}`,
+                inline: false,
+              },
+              {
+                name: `${Util.WindL} Ram usada: ${Util.WindR}`,
                 value: `> **__${(
                   process.memoryUsage().heapUsed /
                   1024 /
@@ -181,7 +208,7 @@ export default new SlashCommandStructure({
               },
               {
                 name: `${Util.WindL} Caracteristicas de desarrollo: ${Util.WindR}`,
-                value: `> ${Util.Arrow} ${KomiShouko.KomiMaidExcited} **Fecha de Creación:** <t:1628722800>.\n> ${Util.Arrow} ${Util.TypeScript} **Lenguaje usado:** TypeScript\n> ${Util.Arrow} ${Util.Discordjs} **Libreria usada:** Discord.js v13.6.0\n> ${Util.Arrow} ${Util.MongoDB} **Database:** MongoDB v4.4.11\n> ${Util.Arrow} ${Util.NodeJS} **Entorno de ejecución:** NodeJS v16.14.0`,
+                value: `> ${Util.Arrow} ${KomiShouko.KomiMaidExcited} **Fecha de Creación:** <t:1628722800>.\n> ${Util.Arrow} ${Util.TypeScript} **Lenguaje usado:** TypeScript\n> ${Util.Arrow} ${Util.Discordjs} **Libreria usada:** Discord.js v13.6.0\n> ${Util.Arrow} ${Util.MongoDB} **Database:** MongoDB v4.4.11\n> ${Util.Arrow} ${Util.NodeJS} **Entorno de ejecución:** NodeJS v16.14.2`,
                 inline: false,
               },
               {

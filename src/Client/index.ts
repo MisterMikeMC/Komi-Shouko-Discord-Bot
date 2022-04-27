@@ -9,17 +9,21 @@ import { promisify } from "util";
 import { Command, Event, EventDistube, Snipe } from "../interfaces";
 import { SlashCommandsRegisterOptions } from "../interfaces/SlashCommandsRegisterOptions";
 import { CommandType } from "../interfaces/SlashCommandsInterface";
+import { join } from "path";
+import { Summit } from "../ItemsForEconomy";
+import { SpotifyPlugin } from "@distube/spotify";
+import Distube from "distube";
 import glob from "glob";
-import path from "path";
+import discordModals from "discord-modals";
 const globPromise = promisify(glob);
 export default class Komi extends Client {
   public commands: Collection<string, Command> = new Collection();
   public aliases: Collection<string, Command> = new Collection();
   public slashcommands: Collection<string, CommandType> = new Collection();
   public events: Collection<string, Event> = new Collection();
-  public distube: any;
-  public distubeevent: Collection<string, EventDistube> = new Collection();
   public snipe: Map<string, Snipe> = new Map();
+  public distubeevent: Collection<string, EventDistube> = new Collection();
+  public distube: any;
   constructor() {
     super({
       intents: [
@@ -55,17 +59,19 @@ export default class Komi extends Client {
       useNewUrlParser: true,
     })
       .then((): void => {
-        console.log("Conectada a MongoDB ✅");        
+        console.log("Conectada a MongoDB ✅");
       })
       .catch((ErrorForConectionToDatabase): void => {
         console.log(
           `Komi no se pudo conectar a MongoDB ❌\nError: ${ErrorForConectionToDatabase}`
         );
       });
+    /* Discord Modals */
+    discordModals(this);
     /* UnhandledRejection */
     process.on("unhandledRejection", (Error): void => console.log(Error));
     /* Command Handler */
-    const commandPath = path.join(__dirname, "..", "Commands", "Commands");
+    const commandPath = join(__dirname, "..", "Commands", "Commands");
     readdirSync(commandPath).forEach((Categories): void => {
       const commands = readdirSync(`${commandPath}/${Categories}`).filter(
         (File): boolean => File.endsWith(".ts")
@@ -81,35 +87,30 @@ export default class Komi extends Client {
       }
     });
     /* Event Handler */
-    const EventPath = path.join(__dirname, "..", "Events");
+    const EventPath = join(__dirname, "..", "Events");
     readdirSync(EventPath).forEach(async (File): Promise<void> => {
       const { event } = await import(`${EventPath}/${File}`);
       this.events.set(event.name, event);
       this.on(event.name, event.run.bind(null, this));
     });
     /* Distube Event Handler */
-    /*
-    const Options = {
+
+    /*const Options = {
       emitAddSongWhenCreatingQueue: false,
       emitAddListWhenCreatingQueue: false,
       emitNewSongOnly: true,
       leaveOnEmpty: true,
       nsfw: false,
       updateYouTubeDL: true,
-      ytdlOptions: {
-        quality: "highestaudio",
-        highWaterMark: 33554432,
-      },
       plugins: [new SpotifyPlugin()],
     };
     this.distube = new Distube(this, Options);
-    const DistubeEventPath = path.join(__dirname, "..", "Distube");
+    const DistubeEventPath = join(__dirname, "..", "Distube");
     readdirSync(DistubeEventPath).forEach(async (File): Promise<void> => {
       const { distubeevent } = await import(`${DistubeEventPath}/${File}`);
       this.distubeevent.set(distubeevent.name, distubeevent);
       this.distube.on(distubeevent.name, distubeevent.run.bind(null, this));
-    });
-    */
+    });*/
   }
   /* Slash Command */
   async importFile(filePath: string): Promise<any> {
@@ -134,6 +135,7 @@ export default class Komi extends Client {
       SlashCommands.push(command);
     });
     this.on("ready", (): void => {
+      Summit();
       this.registerCommands({
         commands: SlashCommands,
         guildId: process.env.guildId,

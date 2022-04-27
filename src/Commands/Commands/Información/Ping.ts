@@ -1,6 +1,7 @@
 import { MessageEmbed } from "discord.js";
 import { Command } from "../../../interfaces";
 import { Ping } from "../../../Data/Emojis.json";
+import mongoose from "mongoose";
 export const command: Command = {
   name: "ping",
   aliases: ["latency"],
@@ -21,8 +22,17 @@ export const command: Command = {
     let EmojiPing5 = Ping.Ping5;
     let PingRespuesta = Date.now() - message.createdTimestamp;
     let PingApi = Komi.ws.ping;
+    let PreDate = Date.now();
+    let PingMongoDB = await new Promise((r, j): void => {
+      mongoose.connection.db
+        .admin()
+        .ping((err, result): void =>
+          err || !result ? j(err || result) : r(Date.now() - PreDate)
+        );
+    });
     let PingEmojiFinal1;
     let PingEmojiFinal2;
+    let PingEmojiFinal3;
     let Color;
     if (PingRespuesta <= 60) {
       PingEmojiFinal1 = EmojiPing5;
@@ -51,6 +61,17 @@ export const command: Command = {
       PingEmojiFinal2 = EmojiPing1;
       Color = "0x930000";
     }
+    if (PingMongoDB <= 60) {
+      PingEmojiFinal3 = EmojiPing5;
+    } else if (PingMongoDB >= 61 && PingMongoDB <= 100) {
+      PingEmojiFinal3 = EmojiPing4;
+    } else if (PingMongoDB >= 101 && PingMongoDB <= 150) {
+      PingEmojiFinal3 = EmojiPing3;
+    } else if (PingMongoDB >= 151 && PingMongoDB <= 200) {
+      PingEmojiFinal3 = EmojiPing2;
+    } else if (PingMongoDB >= 201) {
+      PingEmojiFinal3 = EmojiPing1;
+    }
     message.reply({
       embeds: [
         new MessageEmbed()
@@ -64,6 +85,11 @@ export const command: Command = {
             {
               name: `\`Ping de la API:\``,
               value: `> ¡**__${PingApi}__** ms! ${PingEmojiFinal2}`,
+              inline: false,
+            },
+            {
+              name: `\`Ping de MongoDB:\``,
+              value: `> ¡**__${PingMongoDB}__** ms! ${PingEmojiFinal3}`,
               inline: false,
             },
             {

@@ -6,7 +6,7 @@
         "start": "tsc && node Komipiled/index.js",
         "tsc": "tsc",
         "dev": "nodemon --exec node --loader ts-node/esm/transpile-only src/index.ts",
-        "git": "git add . && git commit -m \"Komi gOd\" && git push -u origin komi && echo \"Git update completada!\""
+        "komit": "git add . && git commit -m \"Komi gOd\" && git push -u origin komi && echo \"Git update completada!\""
     },
     "author": "MrMikeMC",
     "license": "ISC",
@@ -15,8 +15,9 @@
         "@discordjs/voice": "0.6.0",
         "@distube/spotify": "1.1.0",
         "@iamtraction/google-translate": "1.1.2",
+        "bcryptjs": "2.4.3",
         "beautify": "0.0.8",
-        "chalk": "4.1.2",
+        "discord-modals": "1.3.5",
         "discord.js": "13.6.0",
         "distube": "3.1.1",
         "dotenv": "10.0.0",
@@ -31,11 +32,14 @@
         "path": "0.12.7",
         "pretty-ms": "7.0.1",
         "quick.db": "7.1.3",
-        "random-gif-api": "^1.0.4",
+        "random-gif-api": "1.0.4",
         "util": "0.12.4"
     },
     "devDependencies": {
         "@types/node": "17.0.21",
+        "chalk": "4.1.2",
+        "chalk-animation": "1.3.0",
+        "gradient-string": "2.0.0",
         "nodemon": "2.0.15",
         "ts-node": "10.4.0",
         "typescript": "4.5.4"
