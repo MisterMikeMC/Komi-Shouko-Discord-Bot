@@ -1,6 +1,7 @@
 import { Event } from "../interfaces";
+import { Util } from "../Data/Emojis.json";
 import LoginData from "../Schemas/LoginData";
-import UserData from "../Schemas/UserData";
+import UserGlobalProfileData from "../Schemas/UserData";
 import bcrypt from "bcryptjs";
 export const event: Event = {
   name: "modalSubmit",
@@ -18,7 +19,7 @@ export const event: Event = {
       });
       if (userFind) {
         return interactionModal.reply(
-          "El usuario ya existe, intenta con otro nombre."
+          `${Util.No} | El usuario ya existe, intenta con otro nombre.`
         );
       } else {
         let userData = new LoginData({
@@ -28,7 +29,7 @@ export const event: Event = {
         });
         await userData.save();
         interactionModal.reply(
-          `Usuario registrado con éxito, ya puedes acceder a la economía con \`/login\`.`
+          `${Util.Yes} | Usuario registrado con éxito, ya puedes acceder a la economía con \`/economía login\`.`
         );
       }
     } else if (interactionModal.customId === "loginEconomy") {
@@ -36,7 +37,15 @@ export const event: Event = {
         interactionModal.getTextInputValue("usernameLogin");
       let modalValuePassword =
         interactionModal.getTextInputValue("passwordLogin");
-
+      let userData = await UserGlobalProfileData.findOne({
+        userId: interactionModal.user.id,
+      });
+      if (userData) {
+        if (userData.loggedIn.isLogged)
+          return interactionModal.reply(
+            `${Util.No} | Ya estas logeado como **${userData.loggedIn.loggedAs}**, para deslogearte usa \`/economía logout\`.`
+          );
+      }
       let userFind = await LoginData.findOne({
         username: modalValueUsername,
       });
@@ -50,36 +59,32 @@ export const event: Event = {
           modalValueUsername === userFind.username &&
           passwordCompare === true
         ) {
-          let userData = await UserData.findOne({
-            userId: interactionModal.userId,
+          let userData = await UserGlobalProfileData.findOne({
+            userId: interactionModal.user.id,
           });
-
           if (userData) {
-            await UserData.findOneAndUpdate({
+            await UserGlobalProfileData.findOneAndUpdate({
               loggedIn: {
                 isLogged: true,
                 loggedAs: `${userFind.nickname}`,
               },
             });
-            interactionModal.reply(`Bienvenido **${userFind.nickname}**.`);
           } else {
-            let newUserData = new UserData({
-              userId: interactionModal.userId,
+            let newUserData = new UserGlobalProfileData({
+              userId: interactionModal.user.id,
               badges: [],
-              isBlocked: false,
+              isBlacklisted: false,
               loggedIn: {
                 isLogged: true,
                 loggedAs: `${userFind.nickname}`,
               },
             });
             await newUserData.save();
-            interactionModal.reply(`Bienvenido **${userFind.nickname}**.`);
           }
-        } else {
-          interactionModal.reply(`Usuario o contraseña incorrectos.`);
+          interactionModal.reply(`Bienvenido **${userFind.nickname}**.`);
         }
       } else {
-        interactionModal.reply(`Usuario o contraseña incorrecto.`);
+        interactionModal.reply(`${Util.No} | Usuario o contraseña incorrecta.`);
       }
     }
   },

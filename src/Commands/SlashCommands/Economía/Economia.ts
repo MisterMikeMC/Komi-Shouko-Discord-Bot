@@ -1,5 +1,8 @@
 import { SlashCommandStructure } from "../../../interfaces/SlashCommand";
 import { Modal, TextInputComponent, showModal } from "discord-modals";
+import { Util } from "../../../Data/Emojis.json";
+import UserGlobalProfileData from "../../../Schemas/UserData";
+import { InteractionResponseTypes } from "discord.js/typings/enums";
 export default new SlashCommandStructure({
   name: "economía",
   description: "Sub SlashCommands de Economía.",
@@ -103,7 +106,7 @@ export default new SlashCommandStructure({
       name: "fish-select",
       description: "Selecciona un lago para pescar.",
       type: "SUB_COMMAND",
-    }
+    },
   ],
   run: async ({ Komi, interaction }): Promise<void> => {
     if (interaction.options.getSubcommand() === "register") {
@@ -167,7 +170,32 @@ export default new SlashCommandStructure({
         interaction: interaction,
       });
     } else if (interaction.options.getSubcommand() === "logout") {
-      console.log("SlashCommand.");
+      let userData = await UserGlobalProfileData.findOne({
+        userId: interaction.user.id,
+      });
+      if (userData) {
+        if (!userData.loggedIn.isLogged)
+          return interaction.reply({
+            content: `${Util.No} | No estas logeado.`,
+            ephemeral: true,
+          });
+      }
+      if (userData) {
+        await UserGlobalProfileData.findOneAndUpdate({
+          loggedIn: {
+            isLogged: false,
+            loggedAs: "",
+          },
+        });
+      } else {
+        interaction.reply({
+          content: `${Util.No} | No estas logeado.`,
+          ephemeral: true,
+        });
+      }
+      interaction.reply({
+        content: `${Util.Yes} | Te has deslogeado correctamente.`,
+      });
     } else if (interaction.options.getSubcommand() === "balance") {
       console.log("SlashCommand.");
     } else if (interaction.options.getSubcommand() === "work") {
