@@ -17,13 +17,13 @@ export interface EconomyItem {
       time: string;
     };
   };
-  farmingFishing?: {
+  farmingMining?: {
     cooldown: {
       name: string;
       time: string;
     };
   };
-  farmingMining?: {
+  farmingFishing?: {
     cooldown: {
       name: string;
       time: string;

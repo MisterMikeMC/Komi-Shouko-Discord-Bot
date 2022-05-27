@@ -1,6 +1,6 @@
 import { redBright, greenBright } from "chalk";
-import { EconomyItem } from "../interfaces";
-import itemData from "../Schemas/ItemData";
+import { EconomyItem } from "../../interfaces";
+import itemData from "../../Schemas/ItemData";
 export let AddItemForEconomy = async (
   isAdded: boolean,
   idOfObject: number,

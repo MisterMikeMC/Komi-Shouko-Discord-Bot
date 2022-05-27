@@ -1,12 +1,12 @@
-// @ts-nocheck
-import { MessageEmbed } from "discord.js";
+import { User, GuildMember, MessageAttachment, MessageEmbed } from "discord.js";
+import { profileImage } from "discord-arts";
 import { Command } from "../../../interfaces";
 import { Util } from "../../../Data/Emojis.json";
 export const command: Command = {
   name: "userinfo",
   aliases: ["user-info"],
   description: "Mira la información de un usuario.",
-  syntaxis: "<@Usuario>",
+  syntaxis: "<... | @Usuario>",
   category: "Información",
   cooldown: {
     name: "UserInfo",
@@ -14,11 +14,11 @@ export const command: Command = {
   },
   onlyOwner: false,
   maintenance: false,
-  run: async (Komi, message, args) => {
-    let User =
-      message.mentions.members.first() ||
+  run: async (Komi, message, args): Promise<void> => {
+    let User = (message.mentions.members.first() ||
       Komi.users.resolve(args[0]) ||
-      Komi.users.cache.get(args[0]);
+      Komi.users.cache.get(args[0]) ||
+      message.author) as User | any;
     if (!User) {
       message.reply({
         embeds: [
@@ -30,13 +30,11 @@ export const command: Command = {
         ],
       });
     }
+    const rawUserImage = await profileImage(User);
+    const Image = new MessageAttachment(rawUserImage, "profile.png");
     message.reply({
       embeds: [
         new MessageEmbed()
-          .setAuthor({
-            name: `Pedido por: ${message.author.username}`,
-            iconURL: message.author.displayAvatarURL({ dynamic: true }),
-          })
           .setTitle("¡User Info!")
           .setFields(
             {

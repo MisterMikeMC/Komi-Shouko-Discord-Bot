@@ -193,7 +193,7 @@ export default new SlashCommandStructure({
             .addFields(
               {
                 name: `${Util.WindL} Desarrolladores de Komi-san: ${Util.WindR}`,
-                value: `> ${Util.Arrow} Owner [MrMikeMC#9081](https://discord.com/users/437308398845952001) ${Badge.Owner} ${Badge.Developer}`,
+                value: `> ${Util.Arrow} Owner [MrMikeDev#9081](https://discord.com/users/437308398845952001) ${Badge.Owner} ${Badge.Developer}`,
                 inline: false,
               },
               {

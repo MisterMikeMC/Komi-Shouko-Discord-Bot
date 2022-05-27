@@ -1,8 +1,9 @@
 import { SlashCommandStructure } from "../../../interfaces/SlashCommand";
 import { Modal, TextInputComponent, showModal } from "discord-modals";
-import { Util } from "../../../Data/Emojis.json";
-import UserGlobalProfileData from "../../../Schemas/UserData";
-import { InteractionResponseTypes } from "discord.js/typings/enums";
+import { Util, Economia } from "../../../Data/Emojis.json";
+import { MessageEmbed, MessageActionRow, MessageButton } from "discord.js";
+import Items from "../../../Schemas/ItemData";
+import { Logout } from "../../../Functions";
 export default new SlashCommandStructure({
   name: "economía",
   description: "Sub SlashCommands de Economía.",
@@ -107,6 +108,33 @@ export default new SlashCommandStructure({
       description: "Selecciona un lago para pescar.",
       type: "SUB_COMMAND",
     },
+    {
+      name: "felling",
+      description: "Trabaja en las montañas para obtener materiales.",
+      type: "SUB_COMMAND",
+    },
+    {
+      name: "felling-info",
+      description:
+        "Muestra información de las montañas disponibles para trabajar.",
+      type: "SUB_COMMAND",
+    },
+    {
+      name: "felling-select",
+      description: "Selecciona una montaña para trabajar.",
+      type: "SUB_COMMAND",
+    },
+    {
+      name: "plow",
+      description: "Planta una semilla para obtener materiales.",
+      type: "SUB_COMMAND",
+    },
+    {
+      name: "plow-info",
+      description:
+        "Muestra información de las semillas disponibles para plantar.",
+      type: "SUB_COMMAND",
+    },
   ],
   run: async ({ Komi, interaction }): Promise<void> => {
     if (interaction.options.getSubcommand() === "register") {
@@ -120,7 +148,6 @@ export default new SlashCommandStructure({
             .setRequired(true)
             .setPlaceholder("Nickname de usuario.")
             .setMinLength(1)
-            .setMaxLength(15)
             .setStyle("SHORT"),
           new TextInputComponent()
             .setCustomId("usernameEconomy")
@@ -128,7 +155,6 @@ export default new SlashCommandStructure({
             .setRequired(true)
             .setPlaceholder("Username")
             .setMinLength(1)
-            .setMaxLength(15)
             .setStyle("SHORT"),
           new TextInputComponent()
             .setCustomId("passwordEconomy")
@@ -136,7 +162,6 @@ export default new SlashCommandStructure({
             .setRequired(true)
             .setPlaceholder("Password")
             .setMinLength(8)
-            .setMaxLength(50)
             .setStyle("SHORT")
         );
       showModal(ModalRegister, {
@@ -154,7 +179,6 @@ export default new SlashCommandStructure({
             .setRequired(true)
             .setPlaceholder("Username")
             .setMinLength(1)
-            .setMaxLength(15)
             .setStyle("SHORT"),
           new TextInputComponent()
             .setCustomId("passwordLogin")
@@ -162,7 +186,6 @@ export default new SlashCommandStructure({
             .setRequired(true)
             .setPlaceholder("Password")
             .setMinLength(8)
-            .setMaxLength(50)
             .setStyle("SHORT")
         );
       showModal(ModalRegister, {
@@ -170,32 +193,7 @@ export default new SlashCommandStructure({
         interaction: interaction,
       });
     } else if (interaction.options.getSubcommand() === "logout") {
-      let userData = await UserGlobalProfileData.findOne({
-        userId: interaction.user.id,
-      });
-      if (userData) {
-        if (!userData.loggedIn.isLogged)
-          return interaction.reply({
-            content: `${Util.No} | No estas logeado.`,
-            ephemeral: true,
-          });
-      }
-      if (userData) {
-        await UserGlobalProfileData.findOneAndUpdate({
-          loggedIn: {
-            isLogged: false,
-            loggedAs: "",
-          },
-        });
-      } else {
-        interaction.reply({
-          content: `${Util.No} | No estas logeado.`,
-          ephemeral: true,
-        });
-      }
-      interaction.reply({
-        content: `${Util.Yes} | Te has deslogeado correctamente.`,
-      });
+      Logout(interaction);
     } else if (interaction.options.getSubcommand() === "balance") {
       console.log("SlashCommand.");
     } else if (interaction.options.getSubcommand() === "work") {
@@ -207,7 +205,90 @@ export default new SlashCommandStructure({
     } else if (interaction.options.getSubcommand() === "leaderboard") {
       console.log("SlashCommand.");
     } else if (interaction.options.getSubcommand() === "shop") {
-      console.log("SlashCommand.");
+      let allItems = await Items.find()
+        .sort([["id", "ascending"]])
+        .exec();
+      let shopPages = [];
+      let Shop = [];
+      for (let i = 0; i < allItems.length; i += 5) {
+        shopPages.push(allItems.slice(i, i + 5));
+      }
+      for (let i = 0; i < shopPages.length; i++) {
+        let Pages = new MessageEmbed()
+          .setAuthor({
+            name: "Tienda de la economía.",
+            iconURL: interaction.user.displayAvatarURL({ dynamic: true }),
+          })
+          .setColor("#0099ff")
+          .setFooter({
+            text: `Página ${i + 1} de ${shopPages.length}`,
+            iconURL: interaction.user.displayAvatarURL({ dynamic: true }),
+          })
+          .setTimestamp();
+        for (let j = 0; j < shopPages[i].length; j++) {
+          let ItemFor = shopPages[i][j];
+
+          Pages.addFields({
+            name: `\`${ItemFor.id}\`. ${ItemFor.Item.icon} ${ItemFor.Item.name}  \`-\` ${ItemFor.Item.prizeForBuy} ${Economia.KomiCoin}`,
+            value: `> ${ItemFor.Item.description}`,
+            inline: false,
+          });
+        }
+        Shop.push(Pages);
+      }
+      let PageNumber = 0;
+      let UltimaPagina = Shop.length - 1;
+      interaction.reply({
+        embeds: [Shop[PageNumber]],
+        components: [
+          new MessageActionRow().addComponents(
+            new MessageButton()
+              .setEmoji(`${Util.ArrowLeft}`)
+              .setCustomId("Shop_Previous")
+              .setStyle("SECONDARY"),
+            new MessageButton()
+              .setEmoji(`${Util.No}`)
+              .setCustomId("Shop_Delete")
+              .setStyle("DANGER"),
+            new MessageButton()
+              .setEmoji(`${Util.ArrowRight}`)
+              .setCustomId("Shop_Next")
+              .setStyle("SECONDARY")
+          ),
+        ],
+      });
+      interaction.channel
+        .createMessageComponentCollector({
+          componentType: "BUTTON",
+          time: 120000,
+        })
+        .on("collect", (btn): void => {
+          if (interaction.user.id !== btn.user.id) return;
+          if (btn.customId === "Shop_Previous") {
+            if (PageNumber === 0) {
+              PageNumber = UltimaPagina;
+            } else {
+              PageNumber--;
+            }
+            interaction.editReply({
+              embeds: [Shop[PageNumber]],
+            });
+            btn.deferUpdate();
+          } else if (btn.customId === "Shop_Delete") {
+            interaction.deleteReply();
+            btn.deferUpdate();
+          } else if (btn.customId === "Shop_Next") {
+            if (PageNumber === UltimaPagina) {
+              PageNumber = 0;
+            } else {
+              PageNumber++;
+            }
+            interaction.editReply({
+              embeds: [Shop[PageNumber]],
+            });
+            btn.deferUpdate();
+          }
+        });
     } else if (interaction.options.getSubcommand() === "buy") {
       console.log("SlashCommand.");
     } else if (interaction.options.getSubcommand() === "sell") {
@@ -229,6 +310,18 @@ export default new SlashCommandStructure({
     } else if (interaction.options.getSubcommand() === "fish-info") {
       console.log("SlashCommand.");
     } else if (interaction.options.getSubcommand() === "fish-select") {
+      console.log("SlashCommand.");
+    } else if (interaction.options.getSubcommand() === "felling") {
+      console.log("SlashCommand.");
+    } else if (interaction.options.getSubcommand() === "felling-info") {
+      console.log("SlashCommand.");
+    } else if (interaction.options.getSubcommand() === "felling-select") {
+      console.log("SlashCommand.");
+    } else if (interaction.options.getSubcommand() === "plow") {
+      console.log("SlashCommand.");
+    } else if (interaction.options.getSubcommand() === "plow-info") {
+      console.log("SlashCommand.");
+    } else if (interaction.options.getSubcommand() === "plow-select") {
       console.log("SlashCommand.");
     }
   },

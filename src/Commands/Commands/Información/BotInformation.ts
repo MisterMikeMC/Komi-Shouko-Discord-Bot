@@ -1,6 +1,6 @@
 import { Command } from "../../../interfaces";
 import { MessageEmbed } from "discord.js";
-import { Util, Badge, DxD } from "../../../Data/Emojis.json";
+import { Util, Badge, KomiShouko } from "../../../Data/Emojis.json";
 export const command: Command = {
   name: "botinfo",
   aliases: [],
@@ -44,7 +44,7 @@ export const command: Command = {
             },
             {
               name: `${Util.WindL} Caracteristicas de desarrollo: ${Util.WindR}`,
-              value: `> ${Util.Arrow} ${DxD.Koneko} **Fecha de Creación:** <t:1628722800>.\n> ${Util.Arrow} ${Util.TypeScript} **Lenguaje usado:** TypeScript\n> ${Util.Arrow} ${Util.Discordjs} **Libreria usada:** Discord.js v13.6.0\n> ${Util.Arrow} ${Util.MongoDB} **Database:** MongoDB v4.4.11\n> ${Util.Arrow} ${Util.NodeJS} **Entorno de ejecución:** NodeJS v16.10.0`,
+              value: `> ${Util.Arrow} ${KomiShouko.KomiMaidExcited} **Fecha de Creación:** <t:1628722800>.\n> ${Util.Arrow} ${Util.TypeScript} **Lenguaje usado:** TypeScript\n> ${Util.Arrow} ${Util.Discordjs} **Libreria usada:** Discord.js v13.6.0\n> ${Util.Arrow} ${Util.MongoDB} **Database:** MongoDB v4.4.11\n> ${Util.Arrow} ${Util.NodeJS} **Entorno de ejecución:** NodeJS v16.10.0`,
               inline: false,
             },
             {

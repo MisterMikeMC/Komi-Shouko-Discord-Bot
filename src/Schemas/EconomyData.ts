@@ -35,6 +35,16 @@ const economyDataSchema = new Schema({
     default: "",
     required: true,
   },
+  fellingLocation: {
+    type: String,
+    default: "",
+    required: true,
+  },
+  plowLocation: {
+    type: String,
+    default: "",
+    required: true,
+  },
 });
 
 export default model("economyData", economyDataSchema);

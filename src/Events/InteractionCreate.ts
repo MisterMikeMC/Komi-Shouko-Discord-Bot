@@ -49,8 +49,6 @@ export const event: Event = {
             interaction: interaction,
           }
         );
-      } else {
-        interaction.deferUpdate();
       }
     }
   },
